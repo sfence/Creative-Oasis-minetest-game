@@ -1,4 +1,4 @@
-name: GitHub → Discord Embed Notifications
+name: GitHub → Discord Clickable Embed
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
       - name: Install requests
         run: pip install requests
 
-      - name: Send Discord Embed Notification
+      - name: Send Discord Clickable Embed
         run: |
           python - <<'EOF'
           import os, json, requests
@@ -41,13 +41,14 @@ jobs:
           action = os.environ.get("GITHUB_EVENT_ACTION", "N/A")
           event_path = os.environ.get("GITHUB_EVENT_PATH")
 
+          # Base embed
           embed = {
-              "title": f"GitHub Event: {event_name}",
-              "color": 0x2ecc71,  # green
+              "title": f"{event_name} in {repo}",
+              "url": f"https://github.com/{repo}",
+              "color": 0x2ecc71,  # default green
               "fields": [
-                  {"name": "Repository", "value": repo, "inline": True},
                   {"name": "Actor", "value": actor, "inline": True},
-                  {"name": "Action", "value": action, "inline": True}
+                  {"name": "Action", "value": action, "inline": True},
               ]
           }
 
@@ -61,16 +62,18 @@ jobs:
               # Push commits
               if event_name == "push":
                   commits = data.get("commits", [])
-                  if commits:
-                      commit_text = "\n".join(f"- {c.get('message')} ({c.get('author', {}).get('name','')})" for c in commits)
-                      embed["fields"].append({"name": "Commits", "value": commit_text})
+                  for c in commits:
+                      msg = c.get("message", "")
+                      url = c.get("url")  # clickable commit URL
+                      if url:
+                          embed["fields"].append({"name": "Commit", "value": f"[{msg}]({url})"})
 
-              # Issue
+              # Issues
               if event_name == "issues":
                   issue = data.get("issue", {})
                   title = issue.get("title")
                   url = issue.get("html_url")
-                  if title:
+                  if title and url:
                       embed["fields"].append({"name": "Issue", "value": f"[{title}]({url})"})
 
               # Pull request
@@ -78,7 +81,7 @@ jobs:
                   pr = data.get("pull_request", {})
                   title = pr.get("title")
                   url = pr.get("html_url")
-                  if title:
+                  if title and url:
                       embed["fields"].append({"name": "Pull Request", "value": f"[{title}]({url})"})
 
               # Release
@@ -87,14 +90,15 @@ jobs:
                   name = release.get("name")
                   tag = release.get("tag_name")
                   url = release.get("html_url")
-                  if name:
+                  if name and url:
                       embed["fields"].append({"name": "Release", "value": f"[{name} ({tag})]({url})"})
 
               # Fork
               if event_name == "fork":
-                  forkee = data.get("forkee", {}).get("full_name")
-                  if forkee:
-                      embed["fields"].append({"name": "Forked Repository", "value": forkee})
+                  forkee = data.get("forkee", {}).get("html_url")
+                  name = data.get("forkee", {}).get("full_name")
+                  if name and forkee:
+                      embed["fields"].append({"name": "Forked", "value": f"[{name}]({forkee})"})
 
               # Create
               if event_name == "create":
@@ -110,14 +114,13 @@ jobs:
                   if ref_type and ref:
                       embed["fields"].append({"name": "Deleted", "value": f"{ref_type}: {ref}"})
 
-              # Watch/star
+              # Watch / star
               if event_name == "watch":
                   embed["fields"].append({"name": "Starred", "value": f"{actor} starred the repository"})
 
-          # Send embed to Discord
-          payload = {"embeds": [embed]}
+          # Send to Discord
           try:
-              requests.post(WEBHOOK, json=payload)
+              requests.post(WEBHOOK, json={"embeds": [embed]})
           except Exception as e:
               print("Failed to send Discord message:", e)
           EOF
