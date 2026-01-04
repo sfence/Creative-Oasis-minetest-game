@@ -5,10 +5,6 @@ on:
   pull_request:
   issues:
   release:
-  fork:
-  create:
-  delete:
-  watch:
 
 jobs:
   notify:
@@ -17,7 +13,6 @@ jobs:
     steps:
       - name: Send notification to Discord
         run: |
-          # Get basic event info
           EVENT_NAME="${GITHUB_EVENT_NAME}"
           REPO="${GITHUB_REPOSITORY}"
           ACTOR="${GITHUB_ACTOR}"
@@ -25,47 +20,7 @@ jobs:
 
           MESSAGE="**Event:** $EVENT_NAME\n**Action:** $ACTION\n**Repository:** $REPO\n**Sender:** $ACTOR"
 
-          # Only parse JSON if file exists
-          if [ -f "$GITHUB_EVENT_PATH" ]; then
-            # Add commits for push events
-            if [ "$EVENT_NAME" = "push" ]; then
-              COMMITS=$(jq -r '.commits[]? | "- \(.message | gsub("\""; "'\''")) (\(.author.name))"' "$GITHUB_EVENT_PATH" 2>/dev/null || echo "")
-              if [ -n "$COMMITS" ]; then
-                MESSAGE="$MESSAGE\n**Commits:**\n$COMMITS"
-              fi
-            fi
-
-            # Add issue info
-            if [ "$EVENT_NAME" = "issues" ]; then
-              TITLE=$(jq -r '.issue.title // empty' "$GITHUB_EVENT_PATH" 2>/dev/null || echo "")
-              URL=$(jq -r '.issue.html_url // empty' "$GITHUB_EVENT_PATH" 2>/dev/null || echo "")
-              if [ -n "$TITLE" ]; then
-                MESSAGE="$MESSAGE\n**Issue:** $TITLE\n$URL"
-              fi
-            fi
-
-            # Add PR info
-            if [ "$EVENT_NAME" = "pull_request" ]; then
-              TITLE=$(jq -r '.pull_request.title // empty' "$GITHUB_EVENT_PATH" 2>/dev/null || echo "")
-              URL=$(jq -r '.pull_request.html_url // empty' "$GITHUB_EVENT_PATH" 2>/dev/null || echo "")
-              if [ -n "$TITLE" ]; then
-                MESSAGE="$MESSAGE\n**Pull Request:** $TITLE\n$URL"
-              fi
-            fi
-
-            # Add release info
-            if [ "$EVENT_NAME" = "release" ]; then
-              NAME=$(jq -r '.release.name // empty' "$GITHUB_EVENT_PATH" 2>/dev/null || echo "")
-              TAG=$(jq -r '.release.tag_name // empty' "$GITHUB_EVENT_PATH" 2>/dev/null || echo "")
-              URL=$(jq -r '.release.html_url // empty' "$GITHUB_EVENT_PATH" 2>/dev/null || echo "")
-              if [ -n "$NAME" ]; then
-                MESSAGE="$MESSAGE\n**Release:** $NAME ($TAG)\n$URL"
-              fi
-            fi
-          fi
-
-          # Send safely to Discord
           curl -s -H "Content-Type: application/json" \
                -X POST \
-               -d "{\"content\": \"${MESSAGE//\"/\\\"}\"}" \
+               -d "{\"content\": \"$MESSAGE\"}" \
                "${{ secrets.DISCORD_WEBHOOK }}"
