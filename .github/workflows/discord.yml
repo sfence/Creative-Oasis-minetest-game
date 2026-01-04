@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -43,6 +43,7 @@ jobs:
 
           message = f"**Event:** {event_name}\n**Action:** {action}\n**Repository:** {repo}\n**Sender:** {actor}"
 
+          # Read GitHub event JSON
           if event_path and os.path.exists(event_path):
               try:
                   data = json.load(open(event_path))
@@ -56,28 +57,61 @@ jobs:
                       commit_lines = "\n".join(f"- {c.get('message')} ({c.get('author', {}).get('name','')})" for c in commits)
                       message += f"\n**Commits:**\n{commit_lines}"
 
-              # Issue
+              # Issue events
               if event_name == "issues":
                   issue = data.get("issue", {})
                   title = issue.get("title")
                   url = issue.get("html_url")
-                  if title: message += f"\n**Issue:** {title}\n{url}"
+                  if title:
+                      message += f"\n**Issue:** {title}\n{url}"
 
-              # Pull request
+              # Pull request events
               if event_name == "pull_request":
                   pr = data.get("pull_request", {})
                   title = pr.get("title")
                   url = pr.get("html_url")
-                  if title: message += f"\n**Pull Request:** {title}\n{url}"
+                  if title:
+                      message += f"\n**Pull Request:** {title}\n{url}"
 
-              # Release
+              # Release events
               if event_name == "release":
                   release = data.get("release", {})
                   name = release.get("name")
                   tag = release.get("tag_name")
                   url = release.get("html_url")
-                  if name: message += f"\n**Release:** {name} ({tag})\n{url}"
+                  if name:
+                      message += f"\n**Release:** {name} ({tag})\n{url}"
 
+              # Fork events
+              if event_name == "fork":
+                  forkee = data.get("forkee", {}).get("full_name")
+                  if forkee:
+                      message += f"\n**Forked Repository:** {forkee}"
+
+              # Create events
+              if event_name == "create":
+                  ref_type = data.get("ref_type")
+                  ref = data.get("ref")
+                  if ref_type and ref:
+                      message += f"\n**Created {ref_type}:** {ref}"
+
+              # Delete events
+              if event_name == "delete":
+                  ref_type = data.get("ref_type")
+                  ref = data.get("ref")
+                  if ref_type and ref:
+                      message += f"\n**Deleted {ref_type}:** {ref}"
+
+              # Watch / star events
+              if event_name == "watch":
+                  message += f"\n**{actor} starred the repository.**"
+
+              # Other events
+              known_events = ["push", "pull_request", "issues", "release", "fork", "create", "delete", "watch"]
+              if event_name not in known_events:
+                  message += f"\n**Other Event Raw Data:** {json.dumps(data)}"
+
+          # Send message to Discord
           try:
               requests.post(WEBHOOK, json={"content": message})
           except Exception as e:
