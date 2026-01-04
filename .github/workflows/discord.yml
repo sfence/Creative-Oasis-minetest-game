@@ -1,4 +1,4 @@
-name: GitHub → Discord Clickable Embed
+name: GitHub → Discord Notify
 
 on:
   push:
@@ -13,116 +13,45 @@ on:
 jobs:
   notify:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.x"
-
-      - name: Install requests
-        run: pip install requests
-
-      - name: Send Discord Clickable Embed
-        run: |
-          python - <<'EOF'
-          import os, json, requests
-
-          WEBHOOK = os.environ.get("DISCORD_WEBHOOK")
-          if not WEBHOOK:
-              raise Exception("DISCORD_WEBHOOK secret is not set")
-
-          event_name = os.environ.get("GITHUB_EVENT_NAME", "unknown")
-          repo = os.environ.get("GITHUB_REPOSITORY", "unknown")
-          actor = os.environ.get("GITHUB_ACTOR", "unknown")
-          action = os.environ.get("GITHUB_EVENT_ACTION", "N/A")
-          event_path = os.environ.get("GITHUB_EVENT_PATH")
-
-          # Base embed
-          embed = {
-              "title": f"{event_name} in {repo}",
-              "url": f"https://github.com/{repo}",
-              "color": 0x2ecc71,  # default green
-              "fields": [
-                  {"name": "Actor", "value": actor, "inline": True},
-                  {"name": "Action", "value": action, "inline": True},
-              ]
-          }
-
-          # Read event JSON
-          if event_path and os.path.exists(event_path):
-              try:
-                  data = json.load(open(event_path))
-              except Exception:
-                  data = {}
-
-              # Push commits
-              if event_name == "push":
-                  commits = data.get("commits", [])
-                  for c in commits:
-                      msg = c.get("message", "")
-                      url = c.get("url")  # clickable commit URL
-                      if url:
-                          embed["fields"].append({"name": "Commit", "value": f"[{msg}]({url})"})
-
-              # Issues
-              if event_name == "issues":
-                  issue = data.get("issue", {})
-                  title = issue.get("title")
-                  url = issue.get("html_url")
-                  if title and url:
-                      embed["fields"].append({"name": "Issue", "value": f"[{title}]({url})"})
-
-              # Pull request
-              if event_name == "pull_request":
-                  pr = data.get("pull_request", {})
-                  title = pr.get("title")
-                  url = pr.get("html_url")
-                  if title and url:
-                      embed["fields"].append({"name": "Pull Request", "value": f"[{title}]({url})"})
-
-              # Release
-              if event_name == "release":
-                  release = data.get("release", {})
-                  name = release.get("name")
-                  tag = release.get("tag_name")
-                  url = release.get("html_url")
-                  if name and url:
-                      embed["fields"].append({"name": "Release", "value": f"[{name} ({tag})]({url})"})
-
-              # Fork
-              if event_name == "fork":
-                  forkee = data.get("forkee", {}).get("html_url")
-                  name = data.get("forkee", {}).get("full_name")
-                  if name and forkee:
-                      embed["fields"].append({"name": "Forked", "value": f"[{name}]({forkee})"})
-
-              # Create
-              if event_name == "create":
-                  ref_type = data.get("ref_type")
-                  ref = data.get("ref")
-                  if ref_type and ref:
-                      embed["fields"].append({"name": "Created", "value": f"{ref_type}: {ref}"})
-
-              # Delete
-              if event_name == "delete":
-                  ref_type = data.get("ref_type")
-                  ref = data.get("ref")
-                  if ref_type and ref:
-                      embed["fields"].append({"name": "Deleted", "value": f"{ref_type}: {ref}"})
-
-              # Watch / star
-              if event_name == "watch":
-                  embed["fields"].append({"name": "Starred", "value": f"{actor} starred the repository"})
-
-          # Send to Discord
-          try:
-              requests.post(WEBHOOK, json={"embeds": [embed]})
-          except Exception as e:
-              print("Failed to send Discord message:", e)
-          EOF
+      - name: Send Discord message
+        uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_MESSAGE: |
+            📌 **GitHub Event Notification**
+            **Repository:** [${{ github.repository }}](https://github.com/${{ github.repository }})
+            **Event:** ${{ github.event_name }}
+            **Actor:** [${{ github.actor }}](https://github.com/${{ github.actor }})
+
+            ${{ 
+              github.event_name == 'push' && format('**Commits:**\n%s', join(github.event.commits.*.message, '\n')) || '' 
+            }}
+
+            ${{ 
+              github.event_name == 'pull_request' && format('**Pull Request:** [%s](%s)', github.event.pull_request.title, github.event.pull_request.html_url) || '' 
+            }}
+
+            ${{ 
+              github.event_name == 'issues' && format('**Issue:** [%s](%s)', github.event.issue.title, github.event.issue.html_url) || '' 
+            }}
+
+            ${{ 
+              github.event_name == 'release' && format('**Release:** [%s](%s)', github.event.release.name, github.event.release.html_url) || '' 
+            }}
+
+            ${{ 
+              github.event_name == 'fork' && format('**Forked Repo:** [%s](%s)', github.event.forkee.full_name, github.event.forkee.html_url) || '' 
+            }}
+
+            ${{ 
+              github.event_name == 'watch' && format('⭐ %s starred the repository', github.actor) || '' 
+            }}
+
+            ${{ 
+              github.event_name == 'create' && format('**Created %s:** %s', github.event.ref_type, github.event.ref) || '' 
+            }}
+
+            ${{ 
+              github.event_name == 'delete' && format('**Deleted %s:** %s', github.event.ref_type, github.event.ref) || '' 
+            }}
