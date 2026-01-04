@@ -1,1 +1,20 @@
-webhook: ${{ secrets.DISCORD_WEBHOOK }}
+name: GitHub → Discord
+
+on:
+  push:
+  pull_request:
+  issues:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send message to Discord
+        uses: dawidd6/action-send-discord@v3
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: |
+            **Event:** ${{ github.event_name }}
+            **Repository:** ${{ github.repository }}
+            **Sender:** ${{ github.actor }}
+
