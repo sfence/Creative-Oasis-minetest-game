@@ -81,7 +81,7 @@ local get = {
     join_color = defined("dcwebhook.join_color") or 5763719,
     leave_color = defined("dcwebhook.leave_color") or 15548997,
     welcome_color = defined("dcwebhook.welcome_color") or 5793266,
-    death_color = defined("dcwebhook.death_color") or 0xFF0000
+    death_color = defined("dcwebhook.death_color") or 10824234 
 }
 
 -- Simple @1, @2 replacement
