@@ -15,61 +15,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Install jq
-        run: sudo apt-get update && sudo apt-get install -y jq
-
-      - name: Send notification to Discord
+      - name: Send Discord notification
         run: |
-          EVENT_NAME="${GITHUB_EVENT_NAME}"
-          REPO="${GITHUB_REPOSITORY}"
-          ACTOR="${GITHUB_ACTOR}"
-          ACTION="${GITHUB_EVENT_ACTION:-N/A}"
-          EVENT_FILE="${GITHUB_EVENT_PATH}"
-
-          # Start building message
-          MESSAGE="**Event:** $EVENT_NAME\n**Action:** $ACTION\n**Repository:** $REPO\n**Sender:** $ACTOR"
-
-          # Safely add commit messages for push events
-          if [ "$EVENT_NAME" = "push" ] && [ -f "$EVENT_FILE" ]; then
-            COMMITS=$(jq -r '.commits[]? | "- \(.message) (\(.author.name))"' "$EVENT_FILE" 2>/dev/null || echo "")
-            if [ -n "$COMMITS" ]; then
-              MESSAGE="$MESSAGE\n**Commits:**\n$COMMITS"
-            fi
-          fi
-
-          # Add issue info
-          if [ "$EVENT_NAME" = "issues" ] && [ -f "$EVENT_FILE" ]; then
-            TITLE=$(jq -r '.issue.title // empty' "$EVENT_FILE" 2>/dev/null || echo "")
-            URL=$(jq -r '.issue.html_url // empty' "$EVENT_FILE" 2>/dev/null || echo "")
-            if [ -n "$TITLE" ]; then
-              MESSAGE="$MESSAGE\n**Issue:** $TITLE\n$URL"
-            fi
-          fi
-
-          # Add pull request info
-          if [ "$EVENT_NAME" = "pull_request" ] && [ -f "$EVENT_FILE" ]; then
-            TITLE=$(jq -r '.pull_request.title // empty' "$EVENT_FILE" 2>/dev/null || echo "")
-            URL=$(jq -r '.pull_request.html_url // empty' "$EVENT_FILE" 2>/dev/null || echo "")
-            if [ -n "$TITLE" ]; then
-              MESSAGE="$MESSAGE\n**Pull Request:** $TITLE\n$URL"
-            fi
-          fi
-
-          # Add release info
-          if [ "$EVENT_NAME" = "release" ] && [ -f "$EVENT_FILE" ]; then
-            NAME=$(jq -r '.release.name // empty' "$EVENT_FILE" 2>/dev/null || echo "")
-            TAG=$(jq -r '.release.tag_name // empty' "$EVENT_FILE" 2>/dev/null || echo "")
-            URL=$(jq -r '.release.html_url // empty' "$EVENT_FILE" 2>/dev/null || echo "")
-            if [ -n "$NAME" ]; then
-              MESSAGE="$MESSAGE\n**Release:** $NAME ($TAG)\n$URL"
-            fi
-          fi
+          # Build a simple message using only environment variables
+          MESSAGE="GitHub Event: $GITHUB_EVENT_NAME
+Repository: $GITHUB_REPOSITORY
+Actor: $GITHUB_ACTOR
+Action: ${GITHUB_EVENT_ACTION:-N/A}"
 
           # Send to Discord
           curl -s -H "Content-Type: application/json" \
                -X POST \
-               -d "{\"content\": \"${MESSAGE//\"/\\\"}\"}" \
+               -d "{\"content\": \"$MESSAGE\"}" \
                "${{ secrets.DISCORD_WEBHOOK }}"
