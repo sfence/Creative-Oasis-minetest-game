@@ -1,4 +1,4 @@
-name: GitHub → Discord Notifications
+name: GitHub → Discord Embed Notifications
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
       - name: Install requests
         run: pip install requests
 
-      - name: Send Discord notification
+      - name: Send Discord Embed Notification
         run: |
           python - <<'EOF'
           import os, json, requests
@@ -41,9 +41,17 @@ jobs:
           action = os.environ.get("GITHUB_EVENT_ACTION", "N/A")
           event_path = os.environ.get("GITHUB_EVENT_PATH")
 
-          message = f"**Event:** {event_name}\n**Action:** {action}\n**Repository:** {repo}\n**Sender:** {actor}"
+          embed = {
+              "title": f"GitHub Event: {event_name}",
+              "color": 0x2ecc71,  # green
+              "fields": [
+                  {"name": "Repository", "value": repo, "inline": True},
+                  {"name": "Actor", "value": actor, "inline": True},
+                  {"name": "Action", "value": action, "inline": True}
+              ]
+          }
 
-          # Read GitHub event JSON
+          # Read event JSON
           if event_path and os.path.exists(event_path):
               try:
                   data = json.load(open(event_path))
@@ -54,66 +62,62 @@ jobs:
               if event_name == "push":
                   commits = data.get("commits", [])
                   if commits:
-                      commit_lines = "\n".join(f"- {c.get('message')} ({c.get('author', {}).get('name','')})" for c in commits)
-                      message += f"\n**Commits:**\n{commit_lines}"
+                      commit_text = "\n".join(f"- {c.get('message')} ({c.get('author', {}).get('name','')})" for c in commits)
+                      embed["fields"].append({"name": "Commits", "value": commit_text})
 
-              # Issue events
+              # Issue
               if event_name == "issues":
                   issue = data.get("issue", {})
                   title = issue.get("title")
                   url = issue.get("html_url")
                   if title:
-                      message += f"\n**Issue:** {title}\n{url}"
+                      embed["fields"].append({"name": "Issue", "value": f"[{title}]({url})"})
 
-              # Pull request events
+              # Pull request
               if event_name == "pull_request":
                   pr = data.get("pull_request", {})
                   title = pr.get("title")
                   url = pr.get("html_url")
                   if title:
-                      message += f"\n**Pull Request:** {title}\n{url}"
+                      embed["fields"].append({"name": "Pull Request", "value": f"[{title}]({url})"})
 
-              # Release events
+              # Release
               if event_name == "release":
                   release = data.get("release", {})
                   name = release.get("name")
                   tag = release.get("tag_name")
                   url = release.get("html_url")
                   if name:
-                      message += f"\n**Release:** {name} ({tag})\n{url}"
+                      embed["fields"].append({"name": "Release", "value": f"[{name} ({tag})]({url})"})
 
-              # Fork events
+              # Fork
               if event_name == "fork":
                   forkee = data.get("forkee", {}).get("full_name")
                   if forkee:
-                      message += f"\n**Forked Repository:** {forkee}"
+                      embed["fields"].append({"name": "Forked Repository", "value": forkee})
 
-              # Create events
+              # Create
               if event_name == "create":
                   ref_type = data.get("ref_type")
                   ref = data.get("ref")
                   if ref_type and ref:
-                      message += f"\n**Created {ref_type}:** {ref}"
+                      embed["fields"].append({"name": "Created", "value": f"{ref_type}: {ref}"})
 
-              # Delete events
+              # Delete
               if event_name == "delete":
                   ref_type = data.get("ref_type")
                   ref = data.get("ref")
                   if ref_type and ref:
-                      message += f"\n**Deleted {ref_type}:** {ref}"
+                      embed["fields"].append({"name": "Deleted", "value": f"{ref_type}: {ref}"})
 
-              # Watch / star events
+              # Watch/star
               if event_name == "watch":
-                  message += f"\n**{actor} starred the repository.**"
+                  embed["fields"].append({"name": "Starred", "value": f"{actor} starred the repository"})
 
-              # Other events
-              known_events = ["push", "pull_request", "issues", "release", "fork", "create", "delete", "watch"]
-              if event_name not in known_events:
-                  message += f"\n**Other Event Raw Data:** {json.dumps(data)}"
-
-          # Send message to Discord
+          # Send embed to Discord
+          payload = {"embeds": [embed]}
           try:
-              requests.post(WEBHOOK, json={"content": message})
+              requests.post(WEBHOOK, json=payload)
           except Exception as e:
               print("Failed to send Discord message:", e)
           EOF
