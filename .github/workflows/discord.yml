@@ -17,24 +17,24 @@ jobs:
     steps:
       - name: Send notification to Discord
         run: |
-          # Get basic event info
           EVENT_NAME="${GITHUB_EVENT_NAME}"
           REPO="${GITHUB_REPOSITORY}"
           ACTOR="${GITHUB_ACTOR}"
           ACTION="${GITHUB_EVENT_ACTION:-N/A}"
 
-          # Build basic message
           MESSAGE="**Event:** $EVENT_NAME\n**Action:** $ACTION\n**Repository:** $REPO\n**Sender:** $ACTOR"
 
-          # Add commit info if push event
+          # Only attempt to parse commits for push events
           if [ "$EVENT_NAME" = "push" ]; then
-            COMMITS=$(jq -r '.commits[] | "- \(.message) (\(.author.name))"' "$GITHUB_EVENT_PATH")
-            if [ -n "$COMMITS" ]; then
-              MESSAGE="$MESSAGE\n**Commits:**\n$COMMITS"
+            if [ -f "$GITHUB_EVENT_PATH" ]; then
+              COMMITS=$(jq -r '.commits[]? | "- \(.message) (\(.author.name))"' "$GITHUB_EVENT_PATH" 2>/dev/null || echo "")
+              if [ -n "$COMMITS" ]; then
+                MESSAGE="$MESSAGE\n**Commits:**\n$COMMITS"
+              fi
             fi
           fi
 
-          # Send to Discord using your secret
+          # Send message to Discord
           curl -H "Content-Type: application/json" \
                -X POST \
                -d "{\"content\": \"$MESSAGE\"}" \
