@@ -5,14 +5,14 @@ Copyright (C) 2014-2024 ChaosWormz and contributors
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
 License as published by the Free Software Foundation, either
-version 2.1 of the License, or (at your option) any later version.
+version 2.1 of the License, or at your option any later version.
 
 This library is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 --]]
 
-local S = tp.S
+local S = tp.S or function(s) return s end  -- fallback if translator not ready
 
 -- Helper wrapper for safe command execution
 local function safe_func(func)
@@ -26,6 +26,16 @@ local function safe_func(func)
     end
 end
 
+-- Safe version of list_requests if missing
+if not tp.list_requests then
+    tp.list_requests = function(player)
+        minetest.chat_send_player(player, "[TELEPORT] list_requests function is not available.")
+        -- Optionally, you can print active requests if you store them somewhere
+        -- e.g., tp.active_requests[player]
+    end
+end
+
+-- Register commands
 minetest.register_chatcommand("tpr", {
     description = S("Request teleport to another player"),
     params = S("<playername> | leave playername empty to see help message"),
@@ -76,8 +86,14 @@ minetest.register_chatcommand("tpf", {
     description = S("Show all teleport requests, made by you or to you, that are still active"),
     privs = {interact = true, tp = true},
     func = safe_func(function(player)
+        tp.tpf_update_time = tp.tpf_update_time or {}
         tp.tpf_update_time[player] = true
-        tp.list_requests(player)
+        -- safely call list_requests
+        if tp.list_requests then
+            tp.list_requests(player)
+        else
+            minetest.chat_send_player(player, "[TELEPORT] No teleport requests available.")
+        end
     end)
 })
 
