@@ -61,4 +61,15 @@ dofile(MP .. "control_doors.lua")			-- if you want open/close doors/trapdoors wi
 											-- removal by repeated punches
 dofile(MP .. "control_lights.lua")			-- ability to toggle light for other light blocks
 
+minetest.after(0, function()
+    local dust_66 = "basic_machines:iron_dust_66"
+    if minetest.registered_items[dust_66] then
+        minetest.register_craft({
+            type = "cooking",
+            output = "default:steel_ingot",
+            recipe = dust_66,
+            cooktime = 8,
+        })
+    end
+end)
 print("[MOD] basic_machines " .. basic_machines.version .. " loaded.")
