@@ -37,9 +37,9 @@ local news_text = [[
 - Developer: Tomlaus
 - Co-Admin: Alexander_jones
 - Manager: asudip
-- Moderator: 
+- Moderator: Zandar
 - Guardian: Mother, I_am
-- Builder: BMO, yayyer, Zandar
+- Builder: BMO, yayyer, Zandar, filx
 - Contributor: Opons, LadyK
 
 👍 **Server updates 12.23**
