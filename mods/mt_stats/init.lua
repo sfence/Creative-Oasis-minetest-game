@@ -143,7 +143,7 @@ minetest.register_chatcommand("stats", {
         -- Notify if someone checks another player
         if target ~= name then
             minetest.chat_send_player(target,
-                minetest.colorize("#C0C0C0", "[Notice] " .. name .. " viewed your /stats"))
+                minetest.colorize("#C0C0C0", "[Notice] " .. name .. " viewed your '/stats'"))
         end
 
         return true, msg
