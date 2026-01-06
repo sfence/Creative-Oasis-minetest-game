@@ -5,7 +5,7 @@ end
 
 local ANIMATION_SPEED = tonumber(minetest.settings:get("playeranim.animation_speed")) or 2.4
 local ANIMATION_SPEED_SNEAK = tonumber(minetest.settings:get("playeranim.animation_speed_sneak")) or 0.8
-local BODY_ROTATION_DELAY = math.max(math.floor(tonumber(minetest.settings:get("playeranim.body_rotation_delay")) or 7), 1)
+local BODY_ROTATION_DELAY = math.max(math.floor(tonumber(minetest.settings:get("playeranim.body_rotation_delay")) or 4), 1)
 local BODY_X_ROTATION_SNEAK = tonumber(minetest.settings:get("playeranim.body_x_rotation_sneak")) or 6.0
 
 local BONE_POSITION, BONE_ROTATION = (function()
@@ -284,7 +284,7 @@ local function rotate_body_and_head(player)
 			-- This will give the shortest rotation between head and body angles.
 			local angle = ((player_yaw - body_yaw + 3.0*math_pi) % (2.0*math_pi)) - math_pi
 			-- Arbitrary limit of the head turn angle
-			local limit = math_pi*0.3 -- value from 0 to pi, less than 0.45*pi looks good
+			local limit = math_pi*0.1 -- value from 0 to pi, less than 0.45*pi looks good
 			-- Clamp the value to the limit
 			angle = math.max(math.min(angle, limit), -limit)
 			return math_deg(angle)
