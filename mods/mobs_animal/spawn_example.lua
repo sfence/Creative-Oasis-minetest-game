@@ -159,7 +159,7 @@ mobs:spawn({
 mobs:spawn({
 	name = "mobs_animal:rat",
 	nodes = {"default:stone"},
-	min_light = 3,
+	min_light = 1,
 	max_light = 9,
 	interval = 60,
 	chance = 80,
