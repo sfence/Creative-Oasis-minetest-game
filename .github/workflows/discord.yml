@@ -19,10 +19,10 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_MESSAGE: |
-            # Pull Requests — using your simple working PR code
+            # Pull Requests — fork-safe
             ${{ github.event_name == 'pull_request' && format('📦 **GitHub Event**\nRepo: %s\nEvent: %s\nBy: %s', github.repository, github.event_name, github.actor) || '' }}
 
-            # Push commits
+            # Push commits — full commit messages
             ${{ github.event_name == 'push' && format('📦 **GitHub Event**\nRepo: %s\nEvent: %s\nBy: %s\n**Commits:**\n%s', github.repository, github.event_name, github.actor, join(github.event.commits.*.message, '\n')) || '' }}
 
             # Issues
