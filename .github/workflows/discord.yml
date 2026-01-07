@@ -6,9 +6,9 @@ on:
   issues:
   release:
   fork:
-  watch:
   create:
   delete:
+  watch:
 
 jobs:
   notify:
@@ -19,24 +19,51 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_MESSAGE: |
-            # Pull Requests — fork-safe
-            ${{ github.event_name == 'pull_request' && format('📦 **GitHub Event**\nRepo: %s\nEvent: %s\nBy: %s', github.repository, github.event_name, github.actor) || '' }}
+            📌 **GitHub Event Notification**
+            **Repository:** [${{ github.repository }}](https://github.com/${{ github.repository }})
+            **Event:** ${{ github.event_name }}
+            **Actor:** [${{ github.actor }}](https://github.com/${{ github.actor }})
 
-            # Push commits — full commit messages
-            ${{ github.event_name == 'push' && format('📦 **GitHub Event**\nRepo: %s\nEvent: %s\nBy: %s\n**Commits:**\n%s', github.repository, github.event_name, github.actor, join(github.event.commits.*.message, '\n')) || '' }}
+            # Push commits
+            ${{ 
+              github.event_name == 'push' && format('**Commits:**\n%s', join(github.event.commits.*.message, '\n')) || '' 
+            }}
+
+            # Pull Requests (Option A: fork-safe)
+            ${{ 
+              github.event_name == 'pull_request' && format(
+                '**Pull Request:** [%s](%s)',
+                github.event.pull_request.title,
+                github.event.pull_request.html_url
+              ) || '' 
+            }}
 
             # Issues
-            ${{ github.event_name == 'issues' && format('📦 **GitHub Event**\nRepo: %s\nEvent: %s\nBy: %s\n**Issue:** [%s](%s)', github.repository, github.event_name, github.actor, github.event.issue.title, github.event.issue.html_url) || '' }}
+            ${{ 
+              github.event_name == 'issues' && format('**Issue:** [%s](%s)', github.event.issue.title, github.event.issue.html_url) || '' 
+            }}
 
-            # Release
-            ${{ github.event_name == 'release' && format('📦 **GitHub Event**\nRepo: %s\nEvent: %s\nBy: %s\n**Release:** [%s](%s)', github.repository, github.event_name, github.actor, github.event.release.name, github.event.release.html_url) || '' }}
+            # Releases
+            ${{ 
+              github.event_name == 'release' && format('**Release:** [%s](%s)', github.event.release.name, github.event.release.html_url) || '' 
+            }}
 
-            # Fork
-            ${{ github.event_name == 'fork' && format('📦 **GitHub Event**\nRepo: %s\nEvent: %s\nBy: %s\n**Forked Repo:** [%s](%s) by [%s](https://github.com/%s)', github.repository, github.event_name, github.actor, github.event.forkee.full_name, github.event.forkee.html_url, github.event.forkee.owner.login, github.event.forkee.owner.login) || '' }}
+            # Forks
+            ${{ 
+              github.event_name == 'fork' && format('**Forked Repo:** [%s](%s)', github.event.forkee.full_name, github.event.forkee.html_url) || '' 
+            }}
 
-            # Watch (stars)
-            ${{ github.event_name == 'watch' && format('📦 **GitHub Event**\nRepo: %s\nEvent: %s\nBy: %s\n⭐ %s starred the repository', github.repository, github.event_name, github.actor, github.actor) || '' }}
+            # Stars (watch)
+            ${{ 
+              github.event_name == 'watch' && format('⭐ %s starred the repository', github.actor) || '' 
+            }}
 
-            # Create/Delete
-            ${{ github.event_name == 'create' && format('📦 **GitHub Event**\nRepo: %s\nEvent: %s\nBy: %s\n**Created %s:** %s', github.repository, github.event_name, github.actor, github.event.ref_type, github.event.ref) || '' }}
-            ${{ github.event_name == 'delete' && format('📦 **GitHub Event**\nRepo: %s\nEvent: %s\nBy: %s\n**Deleted %s:** %s', github.repository, github.event_name, github.actor, github.event.ref_type, github.event.ref) || '' }}
+            # Create events (branch/tag)
+            ${{ 
+              github.event_name == 'create' && format('**Created %s:** %s', github.event.ref_type, github.event.ref) || '' 
+            }}
+
+            # Delete events (branch/tag)
+            ${{ 
+              github.event_name == 'delete' && format('**Deleted %s:** %s', github.event.ref_type, github.event.ref) || '' 
+            }}
