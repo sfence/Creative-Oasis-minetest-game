@@ -8,9 +8,9 @@ end
 
 
 local messages = {
-	S("You can craft tools and items using a crafting grid. Open your inventory to start crafting."),
-	S("Furnaces allow you to smelt ores and cook items using fuel like coal or wood."),
-	S("Sneak (Shift) prevents you from falling off edges while building or mining."),
+	S("You can craft tools and items using a crafting grid. Open your inventory to start crafting"),
+	S("Furnaces allow you to smelt ores and cook items using fuel like coal or wood"),
+	S("Sneak (Shift) prevents you from falling off edges while building or mining"),
 }
 
 local MESSAGE_INTERVAL = tonumber(core.settings:get("random_messages_interval")) or 120
