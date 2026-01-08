@@ -142,7 +142,7 @@ minetest.register_craft({
     output = 'armor_addon:leggings_tacnayn',
     recipe = {
         {'tac_nayn:tacnayn_rainbow', 'tac_nayn:tacnayn_rainbow', 'tac_nayn:tacnayn_rainbow'},
-        {'armor_addon:helmet_waffle', '', 'armor_addon:helmet_rainbow'},
+        {'armor_addon:leggings_waffle', '', 'armor_addon:leggings_rainbow'},
         {'tac_nayn:tacnayn_rainbow', '', 'tac_nayn:tacnayn_rainbow'},
     }
 })
