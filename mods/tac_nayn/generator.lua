@@ -42,7 +42,7 @@ local function generate_tacnayns(seed, minp, maxp)
 	local pr = PseudoRandom(seed + 9324342)
 	local max_num_tacnayns = math.floor(volume / (16*16*16))
 	for i=1,max_num_tacnayns do
-		if pr:next(0, 250) == 0 then
+		if pr:next(0, 500) == 0 then
 			local x0 = pr:next(minp.x, maxp.x)
 			local y0 = pr:next(minp.y, maxp.y)
 			local z0 = pr:next(minp.z, maxp.z)
@@ -56,6 +56,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	-- Generate tac nayns
 	generate_tacnayns(seed, minp, maxp)
 end)
+
 
 
 
