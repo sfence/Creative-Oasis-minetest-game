@@ -106,7 +106,7 @@ if core.settings:get_bool("pbj_pup_generate") ~= false then
                 end
 
                 -- spawn with 15% chance
-                if air_count >= 10 and pr:next(1,150) <= 15 then
+                if air_count >= 10 and pr:next(1,180) <= 15 then
                     local facedir = pr:next(0,3)
                     place(pos, facedir, pr:next(3,10))
                 end
