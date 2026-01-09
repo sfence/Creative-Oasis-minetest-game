@@ -76,7 +76,7 @@ end
 if core.settings:get_bool("pbj_pup_generate") ~= false then
     local function spawn_in_cave(minp, maxp, seed)
         local pr = PseudoRandom(seed + 9324342)
-        local tries = 10 -- attempts per chunk
+        local tries = 5 -- attempts per chunk
 
         -- y-range underground
         local y_min = math.max(minp.y, -30000)
