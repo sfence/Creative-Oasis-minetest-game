@@ -1230,35 +1230,35 @@ minetest.register_tool("armor_addon:helmet_hero", {
 		description = "Hero Mese Helmet",
 		inventory_image = "armor_addon_inv_helmet_hero.png",
 		groups = {armor_head=56, armor_heal=45, armor_use=150, physics_jump=0.20,physics_speed=0.20,armor_fire = 1,radiation =25,armor_water=1,},
-		armor_groups = {fleshy=18.5, radiation=25},
+		armor_groups = {fleshy=18.5, radiation=125},
         wear = 0,
 	})
 	minetest.register_tool("armor_addon:chestplate_hero", {
 		description = "Hero Mese Chestplate",
 		inventory_image = "armor_addon_inv_chestplate_hero.png",
 		groups = {armor_torso=75, armor_heal=45, armor_use=150, physics_jump=0.20,physics_speed=0.20,armor_fire = 1,radiation=25,armor_water=1,},
-		armor_groups = {fleshy=18.5, radiation=25},
+		armor_groups = {fleshy=18.5, radiation=125},
         wear = 0,
 	})
 	minetest.register_tool("armor_addon:leggings_hero", {
 		description = "Hero Mese Leggings",
 		inventory_image = "armor_addon_inv_leggings_hero.png",
 		groups = {armor_legs=75, armor_heal=45, armor_use=150, physics_jump=0.20,physics_speed=0.20,armor_fire = 1,radiation=25,armor_water=1,},
-        armor_groups = {fleshy=18.5, radiation=25},
+        armor_groups = {fleshy=18.5, radiation=125},
 		wear = 0,
 	})
 	minetest.register_tool("armor_addon:boots_hero", {
 		description = "Hero Mese Boots",
 		inventory_image = "armor_addon_inv_boots_hero.png",
 		groups = {armor_feet=12, armor_heal=12, armor_use=150, physics_jump=0.8,physics_speed=2.0,armor_fire = 2,radiation=25,armor_water=1,},
-        armor_groups = {fleshy=18.5, radiation=25},
+        armor_groups = {fleshy=18.5, radiation=125},
 		wear = 0,
         })
         minetest.register_tool("armor_addon:shield_hero", {
 		description = "Hero Mese Shield",
 		inventory_image = "armor_addon_inv_shield_hero.png",
 		groups = {armor_shield=56, armor_heal=45, armor_use=150, physics_jump=0.20,physics_speed=0.20,armor_fire = 1,radiation=25,armor_water=1,},
-        armor_groups = {fleshy=18.5, radiation=25},
+        armor_groups = {fleshy=18.5, radiation=125},
 		wear = 0,
 	})
 
