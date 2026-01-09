@@ -14,6 +14,7 @@ core.register_node(":astralcraft:astralite",{
   paramtype = "light",
   groups = groups,
   sounds = default.node_sound_glass_defaults(),
+  light_source = 12,
 })
 
 local sf = "astralcraft:star_fragment"
@@ -29,7 +30,7 @@ if astralcraft.dependencies.stairs then
   -- Register stair
   stairs.register_stair(
     "astralite",
-    "astralcraft:star_fragment",
+    "astralcraft:astralite",
     groups,
     { "astralcraft_astralite.png" },
     "Astralite Stair",
@@ -40,7 +41,7 @@ if astralcraft.dependencies.stairs then
   -- Register inner stair
   stairs.register_stair_inner(
     "astralite",
-    "astralcraft:star_fragment",
+    "astralcraft:astralite",
     groups,
     { "astralcraft_astralite.png" },
     "Astralite Inner Stair",
@@ -51,7 +52,7 @@ if astralcraft.dependencies.stairs then
   -- Register outer stair
   stairs.register_stair_outer(
     "astralite",
-    "astralcraft:star_fragment",
+    "astralcraft:astralite",
     groups,
     { "astralcraft_astralite.png" },
     "Astralite Outer Stair",
@@ -62,7 +63,7 @@ if astralcraft.dependencies.stairs then
   -- Register slab
   stairs.register_slab(
     "astralite",
-    "astralcraft:star_fragment",
+    "astralcraft:astralite",
     groups,
     { "astralcraft_astralite.png" },
     "Astralite Slab",
@@ -77,7 +78,7 @@ if astralcraft.dependencies.walls then
     ":walls:astralite",
     "Astralite Wall",
     { "astralcraft_astralite.png" },
-    "astralcraft:star_fragment",
+    "astralcraft:astralite",
     default.node_sound_glass_defaults()
   )
 end
