@@ -2,6 +2,12 @@
 local S = minetest.get_translator("nether_mobs")
 local scale_item = "nether_mobs:dragon_scale"
 
+minetest.register_craftitem("nether_mobs:dragon_scale", {
+    description = S("Nether Dragon Scale"),
+    inventory_image = "nether_dragon_scale.png",
+    groups = {armor_material = 1}
+})
+
 -- BLACKLIST for dragon fire (nodes immune)
 local blacklist = {
     "default:obsidian",
@@ -54,15 +60,15 @@ local animation_fly = {speed_normal=10, speed_sprint=20, stand_start=140, stand_
 -- Nether Dragon (wild)
 mobs:register_mob("nether_mobs:dragon", {
     type = "monster",
-    hp_min = 300,
-    hp_max = 350,
+    hp_min = 350,
+    hp_max = 400,
     armor = 85,
     walk_velocity = 3,
     run_velocity = 5,
     fly = true,
     fly_in = "air",
     pushable = false,
-    view_range = 80,
+    view_range = 60,
     damage = 44,
     attack_type = "dogshoot",
     arrow = "nether_mobs:dragon_breath",
@@ -74,11 +80,12 @@ mobs:register_mob("nether_mobs:dragon", {
     mesh = "mobs_nether_dragon.b3d",
     animation = animation_fly,
     drops = {
-        {name="mobs:meat_raw", chance=1, min=5, max=8},
+        {name="mobs:meat_raw", chance=1, min=22, max=33},
         {name="nether_mobs:dragon_scale", chance=1, min=2, max=5}
     }
 })
 
+-- Tamed Nether Dragon
 -- Tamed Nether Dragon
 mobs:register_mob("nether_mobs:tamed_dragon", {
     type = "npc",
@@ -100,30 +107,33 @@ mobs:register_mob("nether_mobs:tamed_dragon", {
     collisionbox = {-1.3,-1.0,-1.3,1.3,1.8,1.3},
     textures = {{"mobs_nether_dragon_child.png"}},
     mesh = "mobs_nether_dragon.b3d",
-    animation = animation_fly,
+    animation = {speed_normal=10, speed_sprint=20, stand_start=140, stand_end=160, walk_start=110, walk_end=130},
     tamed = true,
 
     do_custom = function(self, dtime)
         if not self.v3 then
             self.v2 = 0
-            self.v3 = 0
+            self.v3 = true
             self.max_speed_forward = 12
             self.max_speed_reverse = 4
             self.accel = 6
-            self.driver_attach_at = {x=0, y=1.25, z=0}
-            self.driver_eye_offset = {x=0, y=3, z=0}
-            --self.driver_scale = {x=1, y=1} -- force player normal size
+
+            -- attach player on dragon back
+            self.driver_attach_at = {x=0, y=1, z=0}
+
+            -- camera above dragon head
+            self.driver_eye_offset = {x=0, y=26, z=0}
+
+            -- force driver scale 1x1
+            self.driver_scale = {x=1, y=1}
         end
 
         if self.driver then
+            -- drive normally
             mobs.drive(self, "walk", "stand", true, dtime)
 
-            -- ensure player stays normal size
-            minetest.after(0.1, function()
-                if self.driver then
-                    self.driver:set_properties({visual_size = {x=1, y=1}})
-                end
-            end)
+            -- force player normal size every tick
+            self.driver:set_properties({visual_size={x=1, y=1}})
 
             return false
         end
@@ -140,7 +150,7 @@ mobs:register_mob("nether_mobs:tamed_dragon", {
         -- detach if already riding
         if self.driver and clicker == self.driver then
             mobs.detach(clicker, {x=1, y=0, z=1})
-            clicker:set_properties({visual_size={x=1, y=1}}) -- reset on dismount
+            clicker:set_properties({visual_size={x=1, y=1}})
             return
         end
 
@@ -155,15 +165,12 @@ mobs:register_mob("nether_mobs:tamed_dragon", {
             end
             self.saddle = true
 
-            -- ensure player stays normal size
-            minetest.after(0.1, function()
-                if self.driver then
-                    self.driver:set_properties({visual_size={x=1, y=1}})
-                end
-            end)
+            -- immediately set player normal size
+            self.driver:set_properties({visual_size={x=1, y=1}})
         end
     end
 })
+
 
 -- Eggs
 mobs:register_egg("nether_mobs:dragon", S("Nether Dragon"), "nether_sand.png^nether_dragon_fire.png", 1)
