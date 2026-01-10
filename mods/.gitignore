@@ -13,6 +13,9 @@ luac.out
 *.obj
 *.elf
 
+# include 3D models obj files
+!*/models/*.obj
+
 # Precompiled Headers
 *.gch
 *.pch
