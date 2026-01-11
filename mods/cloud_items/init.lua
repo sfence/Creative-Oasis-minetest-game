@@ -422,6 +422,7 @@ local sword_desc = S("Cloud Sword")
 minetest.register_tool("cloud_items:cloud_sword", {
 	description = toolranks_loaded and toolranks.create_description(sword_desc) or sword_desc,
 	inventory_image = "cloud_items_tool_cloudsword.png",
+    light_source = 8,
 	range = 5,
 	tool_capabilities = {
 		full_punch_interval = 0.7,
@@ -442,6 +443,7 @@ local pickaxe_desc = S("Cloud Pickaxe")
 minetest.register_tool("cloud_items:cloud_pickaxe", {
 	description = toolranks_loaded and toolranks.create_description(pickaxe_desc) or pickaxe_desc,
 	inventory_image = "cloud_items_tool_cloudpick.png",
+    light_source = 8,
 	tool_capabilities = {
 		full_punch_interval = 0.9,
 		max_drop_level=3,
@@ -462,6 +464,7 @@ minetest.register_tool("cloud_items:cloud_shovel", {
 	description = toolranks_loaded and toolranks.create_description(pickaxe_desc) or shovel_desc,
 	inventory_image = "cloud_items_tool_cloudshovel.png",
 	wield_image = "cloud_items_tool_cloudshovel.png^[transformR90",
+    light_source = 8,
 	tool_capabilities = {
 		full_punch_interval = 1.0,
 		max_drop_level=1,
@@ -481,6 +484,7 @@ local axe_desc = S("Cloud Axe")
 minetest.register_tool("cloud_items:cloud_axe", {
 	description = toolranks_loaded and toolranks.create_description(pickaxe_desc) or axe_desc,
 	inventory_image = "cloud_items_tool_cloudaxe.png",
+    light_source = 8,
 	tool_capabilities = {
 		full_punch_interval = 0.9,
 		max_drop_level=1,
