@@ -1,6 +1,7 @@
 minetest.register_tool("nanotech:carbon_pick", {
 	description = "Carbon Composite Pickaxe",
 	inventory_image = "carbon_pick.png",
+    light_source = 12,
 	wield_image = "carbon_pick.png",
 	tool_capabilities = {
 		full_punch_interval = 0.1,
@@ -15,6 +16,7 @@ minetest.register_tool("nanotech:carbon_pick", {
 minetest.register_tool("nanotech:carbon_shovel", {
 	description = "Carbon Composite Shovel",
 	inventory_image = "carbon_shovel.png",
+    light_source = 12,
 	wield_image = "carbon_shovel.png",
 	tool_capabilities = {
 		full_punch_interval = 0.1,
@@ -30,6 +32,7 @@ minetest.register_tool("nanotech:carbon_axe", {
 	description = "Carbon Composite Axe",
 	inventory_image = "carbon_axe.png",
 	wield_image = "carbon_axe.png",
+    light_source = 12,
 	tool_capabilities = {
 		full_punch_interval = 0.1,
 		max_drop_level=1,
@@ -44,6 +47,7 @@ minetest.register_tool("nanotech:carbon_sword", {
 	description = "Carbon Composite Sword",
 	inventory_image = "carbon_sword.png",
     wield_image = "carbon_sword.png",
+    light_source = 12,
 	tool_capabilities = {
 		full_punch_interval = 0.1,
 		max_drop_level=1,
