@@ -16,6 +16,7 @@ dofile(modpath.."/aqua_sword.lua")
 minetest.register_tool("even_mosword:air_sword", {
 	description = "Air Sword",
 	inventory_image = "mosword_air_sword.png",
+    light_source = 15,
 	tool_capabilities = {
 		full_punch_interval = 0.01,
 		max_drop_level = 0,
@@ -38,6 +39,7 @@ minetest.register_craft({
 minetest.register_tool("even_mosword:hero_sword", {
 	description = "Sam's Sword",
 	inventory_image = "mosword_hero_sword.png",
+    light_source = 13,
 	tool_capabilities = {
 		full_punch_interval = 0.25,
 		max_drop_level=0,
