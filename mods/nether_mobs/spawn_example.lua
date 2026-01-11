@@ -64,7 +64,7 @@ mobs:spawn({
 	max_height = -5000,
 	min_height = -11000,
 	interval = 100,
-	chance = 260,
+	chance = 120,
 	day_toggle = nil,
 	active_object_count = 2,
 	on_spawn = function(self, pos)
@@ -82,7 +82,7 @@ mobs:spawn({
 	max_height = -5000,
 	min_height = -11000,
 	interval = 8,
-	chance = 50,
+	chance = 20,
 	day_toggle = nil,
 	active_object_count = 5,
 	on_spawn = function(self, pos)
