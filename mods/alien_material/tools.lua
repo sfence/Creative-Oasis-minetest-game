@@ -24,6 +24,7 @@
 minetest.register_tool("alien_material:alien_pickaxe", {
     description = "Alien Pickaxe",
     inventory_image = "alien_pickaxe.png",
+    light_source = 9,
     tool_capabilities = {
         full_punch_interval = 1.5,
         max_drop_level = 1,
@@ -42,6 +43,7 @@ minetest.register_tool("alien_material:alien_pickaxe", {
 minetest.register_tool("alien_material:alien_axe", {
     description = "Alien Axe",
     inventory_image = "alien_axe.png",
+    light_source = 9,
     tool_capabilities = {
         full_punch_interval = 1.5,
         max_drop_level = 1,
@@ -60,6 +62,7 @@ minetest.register_tool("alien_material:alien_axe", {
 minetest.register_tool("alien_material:alien_spade", {
     description = "Alien Spade",
     inventory_image = "alien_spade.png",
+    light_source = 9,
     tool_capabilities = {
         full_punch_interval = 1.5,
         max_drop_level = 1,
@@ -78,6 +81,7 @@ minetest.register_tool("alien_material:alien_spade", {
 minetest.register_tool("alien_material:alien_sword", {
     description = "Alien Sword",
     inventory_image = "alien_sword.png",
+    light_source = 9,
     tool_capabilities = {
         full_punch_interval = 0.3,
         max_drop_level = 1,
@@ -96,6 +100,7 @@ minetest.register_tool("alien_material:alien_sword", {
 minetest.register_tool("alien_material:admin_tool", {
     description = "Admin Tool",
     inventory_image = "alien_multitool.png",
+    light_source = 9,
     groups = { not_in_creative_inventory = 1 },
     tool_capabilities = {
         full_punch_interval = 0.3,
@@ -122,7 +127,7 @@ minetest.register_tool("alien_material:admin_tool", {
                 times = { [1]=1.00, [2]=0.50, [3]=0.20 }
             },
         },
-        damage_groups = {fleshy=65536, crumbly=2, choppy=2, cracky=2},
+        damage_groups = {fleshy=1000000, crumbly=2, choppy=2, cracky=2},
     },
 })
 
