@@ -69,7 +69,7 @@ minetest.register_node("cloud_items:decorative_cloud", {
 	tiles = {"default_cloud.png"},
 	light_source = 2,
 	is_ground_content = false,
-	groups = {cracky = 1, level = 3, not_in_creative_inventory = 1},
+	groups = {cracky = 1, level = 3, not_in_creative_inventory = 0},
 	sounds = default.node_sound_stone_defaults(),
 })
 
@@ -124,7 +124,7 @@ minetest.register_node("cloud_items:ongen_big", {
 -- Decorative cloud (white)
 if not minetest.get_modpath("moreblocks") and minetest.get_modpath("stairs") then
 	local recipe = "cloud_items:decorative_cloud"
-	local groups = {cracky = 1, level = 3, not_in_creative_inventory = 1}
+	local groups = {cracky = 1, level = 3, not_in_creative_inventory = 0}
 	local images = {"default_cloud.png"}
 	local sounds = default.node_sound_stone_defaults()
 
@@ -174,7 +174,7 @@ if minetest.get_modpath("moreblocks") then
 	stairsplus:register_all("cloud_items", "decorative_cloud", "cloud_items:decorative_cloud", {
 		description = S("Decorative cloud"),
 		tiles = {"default_cloud.png"},
-		groups = {cracky = 1, level = 3, not_in_creative_inventory = 1},
+		groups = {cracky = 1, level = 3, not_in_creative_inventory = 0},
 		light_source = 2,
 		sounds = default.node_sound_stone_defaults()
 	})
@@ -253,7 +253,7 @@ minetest.register_lbm({
 	run_at_every_load = true,
 
 	action = function(pos, node)
-		chance = math.random(1, 100)
+		chance = math.random(1, 50)
 		if node.name == "cloud_items:ongen_small" then
 			if chance < 12 then
 				minetest.remove_node(pos)
@@ -275,7 +275,7 @@ minetest.register_lbm({
 				minetest.log("action", "cloud_items: Replaced on-generation cloud with normal cloud.")
 			end
 		elseif node.name == "cloud_items:ongen_big" then
-			if chance < 18 then
+			if chance < 20 then
 				minetest.remove_node(pos)
 				minetest.add_node(pos, {name="cloud_items:cloud_ore"})
 				minetest.log("action", "cloud_items: Replaced on-generation cloud with cloud ore.")
@@ -376,7 +376,7 @@ local function generate_cloud_house(minp, maxp, seed)
 	local pr = PseudoRandom(seed + 9324342)
 	local max_num_schematics = math.floor(volume / (65 * 65 * 65))
 	for i = 1, max_num_schematics do
-		if pr:next(0, 1000) == 0 then
+		if pr:next(0, 600) == 0 then
 			local x0 = pr:next(minp.x, maxp.x)
 			local y0 = pr:next(minp.y, maxp.y)
 			local z0 = pr:next(minp.z, maxp.z)
