@@ -58,6 +58,7 @@ minetest.register_tool("nanotech:carbon_paxel", {
 	description = "Carbon Composite Paxel",
 	inventory_image = "carbon_paxel.png",
 	wield_image = "carbon_paxel.png",
+	light_source = 12,
 	tool_capabilities = {
 		full_punch_interval = 0.1,
 		max_drop_level=3,
