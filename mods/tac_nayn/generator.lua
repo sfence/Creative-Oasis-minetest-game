@@ -47,7 +47,7 @@ local function generate_tacnayns(seed, minp, maxp)
 			local y0 = pr:next(minp.y, maxp.y)
 			local z0 = pr:next(minp.z, maxp.z)
 			local p0 = {x=x0, y=y0, z=z0}
-			tac_nayn.make_tacnayn(p0, pr:next(0,3), pr:next(3,15))
+			tac_nayn.make_tacnayn(p0, pr:next(0,3), pr:next(4,12))
 		end
 	end
 end
@@ -56,6 +56,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	-- Generate tac nayns
 	generate_tacnayns(seed, minp, maxp)
 end)
+
 
 
 
