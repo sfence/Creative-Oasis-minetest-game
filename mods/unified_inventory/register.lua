@@ -110,7 +110,7 @@ ui.register_button("misc_set_day", {
 		end
 	end,
 	condition = function(player)
-		return minetest.check_player_privs(player:get_player_name(), {settime=true})
+		return false --minetest.check_player_privs(player:get_player_name(), {settime=true})
 	end,
 })
 
@@ -134,7 +134,7 @@ ui.register_button("misc_set_night", {
 		end
 	end,
 	condition = function(player)
-		return minetest.check_player_privs(player:get_player_name(), {settime=true})
+		return false --minetest.check_player_privs(player:get_player_name(), {settime=true})
 	end,
 })
 
