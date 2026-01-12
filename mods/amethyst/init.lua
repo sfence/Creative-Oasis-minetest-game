@@ -239,7 +239,7 @@ if minetest.get_modpath("3d_armor") then
 		description = ("Amethyst Helmet"),
 		inventory_image = "amethyst_helmet_inv.png",
 		groups = {armor_head=1, armor_heal=5, armor_use=200},
-		armor_groups = {fleshy=10},
+		armor_groups = {fleshy=7},
 		damage_groups = {cracky=2, snappy=1, level=6},
     })
 
@@ -247,7 +247,7 @@ if minetest.get_modpath("3d_armor") then
 		description = ("Amethyst Leggings"),
 		inventory_image = "ameythst_leggings_inv.png",
 		groups = {armor_legs=1, armor_heal=5, armor_use=200},
-		armor_groups = {fleshy=30},
+		armor_groups = {fleshy=7},
 		damage_groups = {cracky=2, snappy=1, level=6},
 	})
 
@@ -255,7 +255,7 @@ if minetest.get_modpath("3d_armor") then
 		description = ("Amethyst Chestplate"),
 		inventory_image = "ameythst_chestplates_inv.png",
 		groups = {armor_torso=1, armor_heal=5, armor_use=200},
-		armor_groups = {fleshy=30},
+		armor_groups = {fleshy=6},
 		damage_groups = {cracky=2, snappy=1, level=6},
 	})
 
@@ -263,7 +263,7 @@ if minetest.get_modpath("3d_armor") then
 		description = ("Amethyst Boots"),
 		inventory_image = "ameythst_boots_inv.png",
 		groups = {armor_feet=1, armor_heal=5, armor_use=200, physics_speed=1.5},
-		armor_groups = {fleshy=10},
+		armor_groups = {fleshy=7},
 		damage_groups = {cracky=2, snappy=1, level=6},
 	})
 
@@ -271,7 +271,7 @@ if minetest.get_modpath("3d_armor") then
 			description = ("Amethyst Shield"),
 			inventory_image = "amethyst_shield_inv.png",
 			groups = {armor_shield=1, armor_heal=6, armor_use=250},
-			armor_groups = {fleshy=10},
+			armor_groups = {fleshy=7},
 			damage_groups = {cracky=2, snappy=1, level=6},
 	})
 
