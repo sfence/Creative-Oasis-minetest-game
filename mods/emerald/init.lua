@@ -239,7 +239,7 @@ if minetest.get_modpath("3d_armor") then
 		description = ("Emerald Helmet"),
 		inventory_image = "emerald_helmet_inv.png",
 		groups = {armor_head=1, armor_heal=4, armor_use=200},
-		armor_groups = {fleshy=10},
+		armor_groups = {fleshy=7},
 		damage_groups = {cracky=2, snappy=1, level=6},
     })
 
@@ -247,7 +247,7 @@ if minetest.get_modpath("3d_armor") then
 		description = ("Emerald Leggings"),
 		inventory_image = "emerald_leggings_inv.png",
 		groups = {armor_legs=1, armor_heal=4, armor_use=200},
-		armor_groups = {fleshy=30},
+		armor_groups = {fleshy=7},
 		damage_groups = {cracky=2, snappy=1, level=6},
 	})
 
@@ -263,7 +263,7 @@ if minetest.get_modpath("3d_armor") then
 		description = ("Emerald Boots"),
 		inventory_image = "emerald_boots_inv.png",
 		groups = {armor_feet=1, armor_heal=4, armor_use=200, physics_speed=1, physics_jump=1},
-		armor_groups = {fleshy=10},
+		armor_groups = {fleshy=7},
 		damage_groups = {cracky=2, snappy=1, level=6},
 	})
 
@@ -271,7 +271,7 @@ if minetest.get_modpath("3d_armor") then
 			description = ("Emerald Shield"),
 			inventory_image = "emerald_shield_inv.png",
 			groups = {armor_shield=1, armor_heal=4, armor_use=200},
-			armor_groups = {fleshy=10},
+			armor_groups = {fleshy=7},
 			damage_groups = {cracky=2, snappy=1, level=6},
 	})
 
