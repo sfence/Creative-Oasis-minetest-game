@@ -1,48 +1,32 @@
--- luacheck: globals minetest
+-- luacheck: globals minetest invsaw
 
-local creative_priv = invsaw.settings.creative_priv
-local priv = invsaw.settings.priv
-
-local function on_priv_change(name)
-	local player = minetest.get_player_by_name(name)
-	if player then
-		invsaw.check_use_status(player)
-	end
+-- Use only 'interact' privilege for saw
+local function can_use_saw(player)
+    return minetest.check_player_privs(player, {interact=true})
 end
 
-local function override_on_priv_change(old)
-	return function(name, cause)
-		on_priv_change(name)
-		if old then
-			old(name, cause)
-		end
-	end
+-- Override invsaw's check function
+if invsaw and invsaw.check_use_status then
+    local old_check = invsaw.check_use_status
+    invsaw.check_use_status = function(player)
+        if can_use_saw(player) then
+            -- Enable saw icon / functionality
+            old_check(player)
+        else
+            -- Optional: disable icon if player can't interact
+            old_check(player)
+        end
+    end
 end
 
-if minetest.registered_privileges[priv] then
-	local def = minetest.registered_privileges[priv]
-	def.on_grant = override_on_priv_change(def.on_grant)
-	def.on_revoke = override_on_priv_change(def.on_revoke)
-else
-	minetest.register_privilege(priv, {
-		description = "Allow use of the circular saw in inventory",
-		give_to_singleplayer = true,
-		give_to_admin = false,
-		on_grant = on_priv_change,
-		on_revoke = on_priv_change,
-	})
-end
+-- Call check_use_status when a player joins
+minetest.register_on_joinplayer(function(player)
+    if can_use_saw(player) then
+        if invsaw.check_use_status then
+            invsaw.check_use_status(player)
+        end
+    end
+end)
 
-if minetest.registered_privileges[creative_priv] then
-	local def = minetest.registered_privileges[creative_priv]
-	def.on_grant = override_on_priv_change(def.on_grant)
-	def.on_revoke = override_on_priv_change(def.on_revoke)
-else
-	minetest.register_privilege(creative_priv, {
-		description = "Allow use of the inventory saw creatively",
-		give_to_singleplayer = true,
-		give_to_admin = false,
-		on_grant = on_priv_change,
-		on_revoke = on_priv_change,
-	})
-end
+-- No need to register or override old privs, so we remove all the old code
+-- invsaw.settings.priv and invsaw.settings.creative_priv are ignored
