@@ -239,7 +239,7 @@ if minetest.get_modpath("3d_armor") then
 		description = ("Ruby Helmet"),
 		inventory_image = "ruby_helmet_inv.png",
 		groups = {armor_head=1, armor_heal=4, armor_use=200},
-		armor_groups = {fleshy=10},
+		armor_groups = {fleshy=8},
 		damage_groups = {cracky=2, snappy=1, level=6},
     })
 
@@ -247,7 +247,7 @@ if minetest.get_modpath("3d_armor") then
 		description = ("Ruby Leggings"),
 		inventory_image = "ruby_leggings_inv.png",
 		groups = {armor_legs=1, armor_heal=4, armor_use=200},
-		armor_groups = {fleshy=30},
+		armor_groups = {fleshy=8},
 		damage_groups = {cracky=2, snappy=1, level=6},
 	})
 
@@ -255,7 +255,7 @@ if minetest.get_modpath("3d_armor") then
 		description = ("Ruby Chestplate"),
 		inventory_image = "ruby_chestplate_inv.png",
 		groups = {armor_torso=1, armor_heal=4, armor_use=200},
-		armor_groups = {fleshy=30},
+		armor_groups = {fleshy=8},
 		damage_groups = {cracky=2, snappy=1, level=6},
 	})
 
@@ -263,7 +263,7 @@ if minetest.get_modpath("3d_armor") then
 		description = ("Ruby Boots"),
 		inventory_image = "ruby_boots_inv.png",
 		groups = {armor_feet=1, armor_heal=4, armor_use=200, physics_jump=0.5},
-		armor_groups = {fleshy=10},
+		armor_groups = {fleshy=8},
 		damage_groups = {cracky=2, snappy=1, level=6},
 	})
 
@@ -271,7 +271,7 @@ if minetest.get_modpath("3d_armor") then
 			description = ("Ruby Shield"),
 			inventory_image = "ruby_shield_inv.png",
 			groups = {armor_shield=1, armor_heal=4, armor_use=200},
-			armor_groups = {fleshy=10},
+			armor_groups = {fleshy=8},
 			damage_groups = {cracky=2, snappy=1, level=6},
 	})
 
