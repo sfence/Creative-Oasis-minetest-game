@@ -98,7 +98,7 @@ local messages = {
 }
 
 -- Message interval (seconds)
-local MESSAGE_INTERVAL = tonumber(core.settings:get("random_messages_interval")) or 120
+local MESSAGE_INTERVAL = tonumber(core.settings:get("random_messages_interval")) or 180
 
 -- Function to get a random message
 function random_messages.get_random_message()
