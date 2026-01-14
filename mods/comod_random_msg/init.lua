@@ -40,6 +40,7 @@ local messages = {
 	S("Items conflicting with each other? Try using an Item Exchanger."),
 	S("Found a bug? Report it by using /mail Anastasiya."),
 	S("Want daytime? Use a Vote Day coin."),
+	S("Can't see stamina/HP bar? Rejoin the game."),
 
 	-- Basic Machines
 	S("[Basic_Machines] Movers can push, pull, and swap nodes automatically."),
