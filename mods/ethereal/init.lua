@@ -173,4 +173,24 @@ if core.get_modpath("ambience") then
 	dofile(path .. "/ambience.lua")
 end
 
+-- remove ethereal cobble → gravel X craft
+core.clear_craft({
+	output = "default:gravel 5",
+	recipe = {
+		{"default:cobble", "", "default:cobble"},
+		{"", "default:cobble", ""},
+		{"default:cobble", "", "default:cobble"}
+	}
+})
+
+-- add 3 cobble → 3 gravel
+core.register_craft({
+	output = "default:gravel 3",
+	recipe = {
+		{"default:cobble", "", "default:cobble"},
+		{"", "default:cobble", ""}
+	}
+})
+
+
 print ("[MOD] Ethereal loaded")
