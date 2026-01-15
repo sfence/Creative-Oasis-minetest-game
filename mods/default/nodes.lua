@@ -2240,6 +2240,7 @@ minetest.register_node("default:water_source", {
 	liquid_alternative_flowing = "default:water_flowing",
 	liquid_alternative_source = "default:water_source",
 	liquid_viscosity = 3,
+	fall_damage_add_percent = -100,
 	post_effect_color = {a = 103, r = 30, g = 60, b = 90},
 	groups = {water = 3, liquid = 3, cools_lava = 1},
 	sounds = default.node_sound_water_defaults(),
@@ -2286,6 +2287,7 @@ minetest.register_node("default:water_flowing", {
 	liquid_alternative_flowing = "default:water_flowing",
 	liquid_alternative_source = "default:water_source",
 	liquid_viscosity = 3,
+	fall_damage_add_percent = -100,
 	post_effect_color = {a = 103, r = 30, g = 60, b = 90},
 	groups = {water = 3, liquid = 3, not_in_creative_inventory = 1,
 		cools_lava = 1},
@@ -2331,6 +2333,7 @@ minetest.register_node("default:river_water_source", {
 	liquid_alternative_flowing = "default:river_water_flowing",
 	liquid_alternative_source = "default:river_water_source",
 	liquid_viscosity = 3,
+	fall_damage_add_percent = -100,
 	-- Not renewable to avoid horizontal spread of water sources in sloping
 	-- rivers that can cause water to overflow riverbanks and cause floods.
 	-- River water source is instead made renewable by the 'force renew'
@@ -2382,6 +2385,7 @@ minetest.register_node("default:river_water_flowing", {
 	liquid_alternative_flowing = "default:river_water_flowing",
 	liquid_alternative_source = "default:river_water_source",
 	liquid_viscosity = 3,
+	fall_damage_add_percent = -100,
 	liquid_renewable = false,
 	liquid_range = 2,
 	post_effect_color = {a = 103, r = 30, g = 76, b = 90},
