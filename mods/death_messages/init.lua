@@ -62,7 +62,24 @@ messages.other = {
 	" did something fatal.",
 	" gave up on life.",
 	" is somewhat dead now.",
-	" passed out -permanently."
+	" passed out -permanently.",
+    " died in a very confusing way.",
+	" suddenly remembered they were mortal.",
+	" stopped living for reasons best left unknown.",
+	" vanished after making a questionable decision.",
+	" experienced a fatal oops moment.",
+	" met an end nobody saw coming.",
+	" discovered the respawn button.",
+	" learned that today was not their day.",
+	" died doing… something.",
+	" randomly ceased all operations.",
+	" encountered a surprise death event.",
+	" found out the world bites back.",
+	" exited life unexpectedly.",
+	" suffered from extreme bad luck.",
+	" pressed on when they probably shouldn’t have.",
+	" had a moment that went very wrong.",
+	" learned too late that was a bad idea."
 }
 
 function get_message(mtype)
