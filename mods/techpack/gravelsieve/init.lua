@@ -773,7 +773,7 @@ minetest.register_on_mods_loaded(function()
 			["emerald:emerald"] = 25,
 			["amethyst:amethyst_ingot"] = 30,
 			["default:iron_lump"] = 50,
-			["default:coal_lump"] = 40,
+			["default:coal_lump"] = 28,
 			["default:copper_lump"] = 40,
 			["default:tin_lump"] = 55,
 			["technic:chromium_lump"] = 76,
