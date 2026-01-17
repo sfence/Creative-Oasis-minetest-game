@@ -319,7 +319,7 @@ end
 
 -- Medium.
 local function generate_medium(minp, maxp, seed)
-	local height_min = 380
+	local height_min = 480
 	local height_max = 1680
 	if maxp.y < height_min or minp.y > height_max then
 		return
@@ -342,7 +342,7 @@ end
 
 -- Big.
 local function generate_big(minp, maxp, seed)
-	local height_min = 580
+	local height_min = 880
 	local height_max = 1880
 	if maxp.y < height_min or minp.y > height_max then
 		return
@@ -697,7 +697,7 @@ if minetest.get_modpath("3d_armor") then
 		description = S("Cloud Helmet"),
 		inventory_image = "cloud_items_inv_helmet_cloud.png",
 		groups = {armor_head=1, armor_heal=9, armor_use=70},
-		armor_groups = {fleshy=10},
+		armor_groups = {fleshy=8},
 		damage_groups = {cracky=2, snappy=1, level=6},
 	})
 
@@ -705,7 +705,7 @@ if minetest.get_modpath("3d_armor") then
 		description = S("Cloud Leggings"),
 		inventory_image = "cloud_items_inv_leggings_cloud.png",
 		groups = {armor_legs=1, armor_heal=10, armor_use=70},
-		armor_groups = {fleshy=10},
+		armor_groups = {fleshy=8},
 		damage_groups = {cracky=2, snappy=1, level=6},
 	})
 
@@ -713,7 +713,7 @@ if minetest.get_modpath("3d_armor") then
 		description = S("Cloud Chestplate"),
 		inventory_image = "cloud_items_inv_chestplate_cloud.png",
 		groups = {armor_torso=1, armor_heal=10, armor_use=70},
-		armor_groups = {fleshy=10},
+		armor_groups = {fleshy=8},
 		damage_groups = {cracky=2, snappy=1, level=6},
 	})
 
@@ -722,7 +722,7 @@ if minetest.get_modpath("3d_armor") then
 		inventory_image = "cloud_items_inv_boots_cloud.png",
 		groups = {armor_feet=1, armor_heal=10, armor_use=70, physics_speed=1,
 				physics_jump=0.5},
-		armor_groups = {fleshy=10},
+		armor_groups = {fleshy=8},
 		damage_groups = {cracky=2, snappy=1, level=6},
 	})
 
@@ -731,7 +731,7 @@ if minetest.get_modpath("3d_armor") then
 			description = S("Cloud Shield"),
 			inventory_image = "cloud_items_inv_shield_cloud.png",
 			groups = {armor_shield=1, armor_heal=9, armor_use=70},
-			armor_groups = {fleshy=10},
+			armor_groups = {fleshy=8},
 			damage_groups = {cracky=2, snappy=1, level=6},
 		})
 
@@ -751,7 +751,7 @@ if minetest.get_modpath("3d_armor") then
 			description = S("Cloud Gauntlets"),
 			inventory_image = "cloud_items_inv_gloves_cloud.png",
 			groups = {armor_hands=1, armor_heal=12, armor_use=70},
-			armor_groups = {fleshy=10},
+			armor_groups = {fleshy=8},
 			damage_groups = {cracky=2, snappy=1, level=6},
 		})
 
