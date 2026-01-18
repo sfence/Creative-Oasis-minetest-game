@@ -682,9 +682,21 @@ function airutils.logic(self)
         end
     end
 
-    --apply rotations
-    self.object:set_rotation({x=newpitch,y=newyaw,z=newroll})
-    --end
+    -- helper function (put it near the top of the file or above logic)
+	local function safe_float(val)
+  	  if val ~= val or val == math.huge or val == -math.huge then
+  	      return 0
+  	  end
+  	  return val
+	end
+	
+	-- apply rotations safely
+	self.object:set_rotation({
+	    x = safe_float(newpitch),
+	    y = safe_float(newyaw),
+	    z = safe_float(newroll),
+	})
+
 
     if (longit_speed / 2) > self._max_speed and self._flap == true then
         if is_attached and self.driver_name then
