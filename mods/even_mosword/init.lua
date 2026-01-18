@@ -461,9 +461,9 @@ minetest.register_craftitem("even_mosword:hero_ingot", {
 minetest.register_craft({
 	output = "even_mosword:hero_ingot",
 	recipe = {
-		{"tac_nayn:tacnayn","tac_nayn:tacnayn_rainbow", "pbj_pup:nyancat_rainbow"},
+		{"armor_addon:waffleblock","tac_nayn:tacnayn_rainbow", "pbj_pup:nyancat_rainbow"},
 		{"cloud_items:cloud_ingot","scifi_nodes:egg", "cloud_items:cloud_ingot"},
-		{"ethereal:crystal_ingot", "technic:uranium_ingot", "lavastuff:ingot"},
+		{"ethereal:crystal_ingot", "alien_material:alien_ingot", "lavastuff:ingot"},
 	}
 })
 
