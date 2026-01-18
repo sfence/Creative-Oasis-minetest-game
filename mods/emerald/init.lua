@@ -255,7 +255,7 @@ if minetest.get_modpath("3d_armor") then
 		description = ("Emerald Chestplate"),
 		inventory_image = "emerald_chestplate_inv.png",
 		groups = {armor_torso=1, armor_heal=4, armor_use=200},
-		armor_groups = {fleshy=30},
+		armor_groups = {fleshy=7},
 		damage_groups = {cracky=2, snappy=1, level=6},
 	})
 
