@@ -75,6 +75,15 @@ local crys_dia = terumet.register_crystal{
 }
 terumet.register_vulcan_result('default:stone_with_diamond', crys_dia)
 
+if minetest.get_modpath("elepower") then
+	terumet.register_crystal({
+		suffix = "iron",
+		color = "#fcf3e8",
+		name = "Crystallized Steel",
+		cooking_result = "default:steel_ingot",
+	})
+end
+
 -- outside mods can access ids of default crystallized materials through terumet.crystal_ids
 terumet.crystal_ids = {
     terumetal=crys_terumetal,
