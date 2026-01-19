@@ -3,6 +3,7 @@ local mesecons_materials = minetest.get_modpath("mesecons_materials")
 local has_mcl = minetest.get_modpath("mcl_core")
 local has_mcl_dye = minetest.get_modpath("mcl_dye")
 local has_moreores = minetest.get_modpath("moreores")
+local has_elepower = minetest.get_modpath("elepower")
 
 technic.materials = {
 	stone = has_mcl and "mcl_core:stone" or "default:stone",
@@ -10,7 +11,6 @@ technic.materials = {
 	mossycobble = has_mcl and "mcl_core:mossycobble" or "default:mossycobble",
 	gold_ingot = has_mcl and "mcl_core:gold_ingot" or "default:gold_ingot",
 	gold_lump = has_mcl and "mcl_raw_ores:raw_gold" or "default:gold_lump",
-	steel_ingot = has_mcl and "mcl_core:iron_ingot" or "default:steel_ingot",
 	iron_lump = has_mcl and "mcl_raw_ores:raw_iron" or "default:iron_lump",
 	diamond = has_mcl and "mcl_core:diamond" or "default:diamond",
 	dirt = has_mcl and "mcl_core:dirt" or "default:dirt",
@@ -70,9 +70,14 @@ technic.materials = {
 	silver_ingot = has_moreores and "moreores:silver_ingot" or has_mcl and "mcl_core:gold_ingot" or "default:gold_ingot",
 	pick_silver = has_moreores and "moreores:pick_silver" or has_mcl and "mcl_tools:pick_gold" or "default:gold_pickaxe",
 	mithril_block = has_moreores and "moreores:mithril_block" or has_mcl and "mcl_core:lapisblock" or "default:goldblock",
+    steel_ingot = has_elepower and "elepower:iron_ingot" or has_mcl and "mcl_core:iron_ingot" or "default:steel_ingot",
+
 }
 
 if has_mcl and has_moreores then
 	technic.materials.tin_ingot = "moreores:tin_ingot"
 	technic.materials.tin_lump = "moreores:tin_lump"
 end
+
+
+
