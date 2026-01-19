@@ -235,11 +235,3 @@ local vacfood_options = terumet.options.vac_oven.VAC_FOOD
 if vacfood_options and vacfood_options.ACTIVE then terumet.do_lua_file('material/vacfood') end
 terumet.do_lua_file('interop/crusher_misc')
 
-if minetest.get_modpath("elepower") then
-	terumet.register_crystal({
-		suffix = "iron",
-		color = "#ffdcb5",
-		name = "Crystallized Iron",
-		cooking_result = "default:steel_ingot",
-	})
-end
