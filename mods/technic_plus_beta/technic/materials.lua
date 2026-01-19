@@ -70,7 +70,7 @@ technic.materials = {
 	silver_ingot = has_moreores and "moreores:silver_ingot" or has_mcl and "mcl_core:gold_ingot" or "default:gold_ingot",
 	pick_silver = has_moreores and "moreores:pick_silver" or has_mcl and "mcl_tools:pick_gold" or "default:gold_pickaxe",
 	mithril_block = has_moreores and "moreores:mithril_block" or has_mcl and "mcl_core:lapisblock" or "default:goldblock",
-    steel_ingot = has_elepower and "elepower:iron_ingot" or has_mcl and "mcl_core:iron_ingot" or "default:steel_ingot",
+    steel_ingot = has_elepower and "elepower_dynamics:iron_ingot" or has_mcl and "mcl_core:iron_ingot" or "default:steel_ingot",
 
 }
 
