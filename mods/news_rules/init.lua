@@ -13,7 +13,7 @@ local news_text = [[
 - A classic Minetest-Game world powered by the Technic modpack!
 - Build factories, automate machines, generate power, process ores, and create massive tech systems. 
 - A chill survival server for players who love engineering, automation, and big builds.
-- As you can see, Creative Oasis is not creative mode, "Creative" means bring tour creativity to this perfect, chilling and friendly community!
+- As you can see, Creative Oasis is not creative mode, "Creative" means bring your creativity to this perfect, chilling and friendly community!
 *Note: This server only allow 5.8 and newer version; if you are using 5.7 and lower version, you maybe get bugs!
 
 📜 **Server Rules/Info**
