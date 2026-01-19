@@ -80,7 +80,7 @@ if minetest.get_modpath("elepower") then
 		suffix = "iron",
 		color = "#fcf3e8",
 		name = "Crystallized Steel",
-		cooking_result = "default:steel_ingot",
+		cooking_result = "elepower_dynamics:iron_ingot",
 	})
 end
 
