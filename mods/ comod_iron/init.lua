@@ -8,13 +8,7 @@ minetest.after(0, function()
         }
     })
     
-	minetest.register_craft({
-		type = "cooking",
-		output = "default:steel_ingot",
-		recipe = "technic:wrought_iron_dust",
-		cooktime = 8
-	})
-
+	
 
 end)
 
