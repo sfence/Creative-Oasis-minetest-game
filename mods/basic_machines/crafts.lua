@@ -21,12 +21,12 @@ if minetest.get_modpath("darkage") then
 	})
 
 	if use_default then
-		minetest.register_craft({
-			type = "cooking",
-			output = "darkage:basalt",
-			recipe = "default:stone",
-			cooktime = 60
-		})
+		--minetest.register_craft({
+			--type = "cooking",
+			--output = "darkage:basalt",
+			--recipe = "default:stone",
+			--cooktime = 60
+		--})
 
 		minetest.register_craft({
 			output = "darkage:serpentine",
