@@ -63,7 +63,7 @@ mobs:spawn({
 	max_light = 14,
 	max_height = -5000,
 	min_height = -11000,
-	interval = 30,
+	interval = 10,
 	chance = 120,
 	day_toggle = nil,
 	active_object_count = 2,
@@ -76,12 +76,12 @@ mobs:spawn({
 })
 
 mobs:spawn({
-	max_light = 12,
+	max_light = 14,
 	name = "nether_mobs:netherman",
 	nodes = {"nether:sand","nether:rack","nether:rack_deep"},
 	max_height = -5000,
 	min_height = -11000,
-	interval = 8,
+	interval = 5,
 	chance = 20,
 	day_toggle = nil,
 	active_object_count = 5,
