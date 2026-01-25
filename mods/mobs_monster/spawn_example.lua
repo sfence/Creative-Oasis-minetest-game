@@ -67,7 +67,7 @@ mobs:spawn({
 	max_light = 7,
 	chance = 600,
 	active_object_count = 2,
-	min_height = 0,
+	min_height = 100,
 	day_toggle = false,
 })
 
@@ -88,8 +88,8 @@ mobs:spawn({
 	name = "mobs_monster:lava_flan",
 	nodes = {"default:lava_source"},
 	chance = 150,
-	active_object_count = 1,
-	max_height = 0,
+	active_object_count = 3,
+	max_height = 100,
 })
 
 -- Mese Monster
@@ -120,7 +120,7 @@ mobs:spawn({
 	nodes = {"default:desert_sand"},
 	chance = 700,
 	active_object_count = 2,
-	min_height = 0,
+	min_height = 100,
 })
 
 -- Spider (above ground)
@@ -158,7 +158,7 @@ mobs:spawn({
 	nodes = {"default:stone", "default:desert_stone", "default:sandstone"},
 	max_light = 7,
 	chance = 700,
-	max_height = 0,
+	max_height = 100,
 })
 
 -- Tree Monster
@@ -168,7 +168,7 @@ mobs:spawn({
 	nodes = {"default:leaves", "default:jungleleaves"},
 	max_light = 10,
 	chance = 700,
-	min_height = 0,
+	min_height = 100,
 	day_toggle = false,
 })
 
@@ -182,6 +182,6 @@ mobs:spawn({
 	},
 	max_light = 12,
 	chance = 2500,
-	min_height = 0,
-	active_object_count = 1,
+	min_height = 100,
+	active_object_count = 2,
 })
