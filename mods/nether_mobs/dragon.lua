@@ -180,8 +180,8 @@ if not nethermobs.custom_spawn then
         min_height = -11000,
         max_height = -5000,
         interval = 8,
-        chance = 200,
-        active_object_count = 2, 
+        chance = 500,
+        active_object_count = 1, 
         on_spawn = function(self, pos)
             pos.y = pos.y + 0.5
             mobs:effect(pos, 30, "nether_particle.png", 0.1, 2, 3, 5)
