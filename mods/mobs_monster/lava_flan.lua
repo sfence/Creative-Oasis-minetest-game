@@ -32,7 +32,7 @@ mobs:register_mob("mobs_monster:lava_flan", {
 	view_range = 10,
 	floats = 1,
 	drops = {
-		{name = "mobs:lava_orb", chance = 26, min = 1, max = 1}
+		{name = "mobs:lava_orb", chance = 50, min = 1, max = 1}
 	},
 	water_damage = 8,
 	lava_damage = -1,
@@ -106,8 +106,8 @@ if not mobs.custom_spawn_monster then
 	mobs:spawn({
 		name = "mobs_monster:lava_flan",
 		nodes = {"default:lava_source"},
-		chance = 1500,
-		active_object_count = 1,
+		chance = 150,
+		active_object_count = 3,
 		max_height = 0
 	})
 end
@@ -257,7 +257,7 @@ mobs:register_mob("mobs_monster:obsidian_flan", {
 	floats = 0,
 	drops = {
 		{name = "default:obsidian_shard", chance = 1, min = 1, max = 5},
-		{name = "default:obsidian", chance = 3, min = 0, max = 2}
+		{name = "default:obsidian", chance = 1, min = 2, max = 3}
 	},
 	water_damage = 0,
 	lava_damage = 8,
