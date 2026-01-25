@@ -65,7 +65,7 @@ mobs:spawn({
 	nodes = {"default:dirt_with_grass"},
 	min_light = 0,
 	max_light = 7,
-	chance = 6000,
+	chance = 600,
 	active_object_count = 2,
 	min_height = 0,
 	day_toggle = false,
@@ -77,7 +77,7 @@ mobs:spawn({
 	name = "mobs_monster:dungeon_master",
 	nodes = {"default:stone"},
 	max_light = 5,
-	chance = 9000,
+	chance = 900,
 	active_object_count = 1,
 	max_height = -70,
 })
@@ -87,7 +87,7 @@ mobs:spawn({
 mobs:spawn({
 	name = "mobs_monster:lava_flan",
 	nodes = {"default:lava_source"},
-	chance = 1500,
+	chance = 150,
 	active_object_count = 1,
 	max_height = 0,
 })
@@ -98,7 +98,7 @@ mobs:spawn({
 	name = "mobs_monster:mese_monster",
 	nodes = {"default:stone"},
 	max_light = 7,
-	chance = 5000,
+	chance = 500,
 	active_object_count = 1,
 	max_height = -20,
 })
@@ -108,8 +108,8 @@ mobs:spawn({
 mobs:spawn({
 	name = "mobs_monster:oerkki",
 	nodes = {"default:stone"},
-	max_light = 7,
-	chance = 7000,
+	max_light = 11,
+	chance = 700,
 	max_height = -10,
 })
 
@@ -118,7 +118,7 @@ mobs:spawn({
 mobs:spawn({
 	name = "mobs_monster:sand_monster",
 	nodes = {"default:desert_sand"},
-	chance = 7000,
+	chance = 700,
 	active_object_count = 2,
 	min_height = 0,
 })
@@ -133,7 +133,7 @@ mobs:spawn({
 	},
 	min_light = 0,
 	max_light = 8,
-	chance = 7000,
+	chance = 700,
 	active_object_count = 1,
 	min_height = 25,
 	max_height = 31000,
@@ -145,7 +145,7 @@ mobs:spawn({
 	nodes = {"default:stone_with_mese", "default:mese", "default:stone"},
 	min_light = 0,
 	max_light = 7,
-	chance = 7000,
+	chance = 700,
 	active_object_count = 1,
 	min_height = -31000,
 	max_height = -40,
@@ -157,7 +157,7 @@ mobs:spawn({
 	name = "mobs_monster:stone_monster",
 	nodes = {"default:stone", "default:desert_stone", "default:sandstone"},
 	max_light = 7,
-	chance = 7000,
+	chance = 700,
 	max_height = 0,
 })
 
@@ -166,8 +166,8 @@ mobs:spawn({
 mobs:spawn({
 	name = "mobs_monster:tree_monster",
 	nodes = {"default:leaves", "default:jungleleaves"},
-	max_light = 7,
-	chance = 7000,
+	max_light = 10,
+	chance = 700,
 	min_height = 0,
 	day_toggle = false,
 })
@@ -180,8 +180,8 @@ mobs:spawn({
 		"default:snow", "default:ice", "default:stone",
 		"default:dry_dirt_with_dry_grass", "ethereal:dry_dirt"
 	},
-	max_light = 7,
-	chance = 25000,
+	max_light = 12,
+	chance = 2500,
 	min_height = 0,
 	active_object_count = 1,
 })
