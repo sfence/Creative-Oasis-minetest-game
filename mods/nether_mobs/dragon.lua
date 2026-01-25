@@ -85,7 +85,7 @@ mobs:register_mob("nether_mobs:dragon", {
     }
 })
 
--- Tamed Nether Dragon
+
 -- Tamed Nether Dragon
 mobs:register_mob("nether_mobs:tamed_dragon", {
     type = "npc",
@@ -170,6 +170,27 @@ mobs:register_mob("nether_mobs:tamed_dragon", {
         end
     end
 })
+
+-- Auto-spawn wild Nether Dragons
+if not nethermobs.custom_spawn then
+    mobs:spawn({
+        name = "nether_mobs:dragon",
+        nodes = {"nether:rack", "nether:rack_deep"},
+        neighbors = nil,
+        min_height = -11000,
+        max_height = -5000,
+        interval = 8,
+        chance = 200,
+        active_object_count = 2, 
+        on_spawn = function(self, pos)
+            pos.y = pos.y + 0.5
+            mobs:effect(pos, 30, "nether_particle.png", 0.1, 2, 3, 5)
+            pos.y = pos.y + 0.25
+            mobs:effect(pos, 30, "nether_particle.png", 0.1, 2, 3, 5)
+        end,
+    })
+end
+
 
 
 -- Eggs
