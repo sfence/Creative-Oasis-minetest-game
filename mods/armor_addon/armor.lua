@@ -1250,7 +1250,7 @@ minetest.register_tool("armor_addon:helmet_hero", {
 	minetest.register_tool("armor_addon:boots_hero", {
 		description = "Hero Mese Boots",
 		inventory_image = "armor_addon_inv_boots_hero.png",
-		groups = {armor_feet=12, armor_heal=12, armor_use=150, physics_jump=0.8,physics_speed=2.2,armor_fire = 2,radiation=25,armor_water=1,},
+		groups = {armor_feet=12, armor_heal=12, armor_use=150, physics_jump=1,physics_speed=2.5,armor_fire = 2,radiation=25,armor_water=1,},
         armor_groups = {fleshy=18.5, radiation=125},
 		wear = 0,
         })
