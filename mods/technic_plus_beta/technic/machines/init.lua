@@ -78,3 +78,22 @@ minetest.register_lbm({
 		end
 	end,
 })
+
+local SPEED_MULT = 0.25  -- 0.25× speed
+
+minetest.after(0, function()
+    for _, def in pairs(minetest.registered_nodes) do
+        if def.technic_run then
+            -- If machine uses speed, multiply it
+            if def.speed then
+                def.speed = def.speed * SPEED_MULT
+            end
+
+            -- If machine uses time, increase time to slow it down
+            if def.time then
+                def.time = def.time / SPEED_MULT
+            end
+        end
+    end
+end)
+
