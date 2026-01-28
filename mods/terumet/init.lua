@@ -235,3 +235,17 @@ local vacfood_options = terumet.options.vac_oven.VAC_FOOD
 if vacfood_options and vacfood_options.ACTIVE then terumet.do_lua_file('material/vacfood') end
 terumet.do_lua_file('interop/crusher_misc')
 
+-------------------
+-- Slow all Terumet machines to 0.5× speed
+-------------------
+local TERU_MULT = 0.5
+
+-- Furnace machines
+if terumet.options.furnace and terumet.options.furnace.TIME_MULT then
+    terumet.options.furnace.TIME_MULT = terumet.options.furnace.TIME_MULT * TERU_MULT
+end
+
+-- Generic machine options (if used)
+if terumet.options.machine and terumet.options.machine.TIME_MULT then
+    terumet.options.machine.TIME_MULT = terumet.options.machine.TIME_MULT * TERU_MULT
+end
