@@ -29,7 +29,7 @@ local craft_ingreds = {
 }
 
 -- Terumet armors to skip
-local teru_ingots = {cgls=true, tcop=true, tcha=true, tgol=true, tste=true}
+local teru_ingots = {cgls=true, tcop=true, tcha=true, tgol=true, tste=true, hero=true,}
 
 -- Register armor recipes (skip Terumet)
 for k, v in pairs(craft_ingreds) do
@@ -152,5 +152,51 @@ minetest.register_craft({
         {'armor_addon:shield_waffle', 'tac_nayn:tacnayn_rainbow', 'armor_addon:shield_rainbow'},
         {'tac_nayn:tacnayn_rainbow', 'tac_nayn:tacnayn', 'tac_nayn:tacnayn_rainbow'},
         {'', 'tac_nayn:tacnayn_rainbow', ''},
+    }
+})
+
+--Hero
+
+minetest.register_craft({
+    output = "armor_addon:helmet_hero",
+    recipe = {
+        {"armor_addon:helmet_tacnayn","even_mosword:hero_ingot","lavastuff:helmet_lava"},
+        {"even_mosword:hero_ingot","","even_mosword:hero_ingot"},
+        {"","",""},
+    }
+})
+
+minetest.register_craft({
+    output = "armor_addon:chestplate_hero",
+    recipe = {
+        {"even_mosword:hero_ingot","","even_mosword:hero_ingot"},
+        {"armor_addon:chestplate_tacnayn","even_mosword:hero_ingot","lavastuff:chestplate_lava"},
+        {"even_mosword:hero_ingot","even_mosword:hero_ingot","even_mosword:hero_ingot"},
+    }
+})
+
+minetest.register_craft({
+    output = "armor_addon:leggings_hero",
+    recipe = {
+        {"even_mosword:hero_ingot","even_mosword:hero_ingot","even_mosword:hero_ingot"},
+        {"armor_addon:leggings_tacnayn","","lavastuff:leggings_lava"},
+        {"even_mosword:hero_ingot","","even_mosword:hero_ingot"},
+    }
+})
+
+minetest.register_craft({
+    output = "armor_addon:boots_hero",
+    recipe = {
+        {"armor_addon:boots_tacnayn","","lavastuff:boots_lava"},
+        {"even_mosword:hero_ingot","","even_mosword:hero_ingot"},
+    }
+})
+
+minetest.register_craft({
+    output = "armor_addon:shield_hero",
+    recipe = {
+        {"armor_addon:shield_tacnayn","even_mosword:hero_ingot","lavastuff:shield_lava"},
+        {"even_mosword:hero_ingot","even_mosword:hero_ingot","even_mosword:hero_ingot"},
+        {"","even_mosword:hero_ingot",""},
     }
 })
