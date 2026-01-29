@@ -11,6 +11,7 @@ blacklist = { -- this nodes can't be destroyed by the nether dragon fire
 	"stairs:stair_obsidian_block",
 	"stairs:stair_obsidianbrick",
 	"nether:portal",
+    "bones:bones",
 }
 
 local S = minetest.get_translator("nether_mobs")
@@ -357,7 +358,7 @@ mobs:register_mob("nether_mobs:dragon", {
 	drops = {
 		{name = "mobs:meat_raw", chance = 1, min = 15, max = 28},
 		{name = "nether_mobs:dragon_scale", chance = 1, min = 1, max = 3},
-		{name = "nether_mobs:tamed_dragon", chance = 26, min = 1, max = 1},
+		{name = "nether_mobs:dragon_egg", chance = 26, min = 1, max = 1},
 		{name = "nether:rack", chance = 3, min = 2, max = 4},
 		{name = "nether:rack_deep", chance = 3, min = 1, max = 2},
 		{name = "nether:brick_compressed", chance = 5, min = 1, max = 2},
@@ -449,7 +450,7 @@ mobs:register_mob("nether_mobs:tamed_dragon", {
 	drops = {
 		{name = "mobs:meat_raw", chance = 1, min = 5, max = 8},
 		{name = "nether_mobs:dragon_scale", chance = 1, min = 1, max = 1}, --less scale dropped by tamed dragon
-		{name = "nether_mobs:dragon_egg", chance = 12, min = 1, max = 1},
+		{name = "nether_mobs:dragon_egg", chance = 52, min = 1, max = 1},
 		{name = "nether:rack", chance = 3, min = 2, max = 4},
 		{name = "nether:rack_deep", chance = 3, min = 1, max = 2},
 		{name = "nether:brick_compressed", chance = 5, min = 1, max = 2},
