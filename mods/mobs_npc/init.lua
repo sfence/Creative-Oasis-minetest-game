@@ -109,8 +109,8 @@ for _, mob_name in ipairs(npc_list) do
 		min_light = 2,
 		max_light = 15,
 		interval = 30,
-		chance = 300,
-		active_object_count = 1,
+		chance = 1000,
+		active_object_count = 2,
 		min_height = -50,
 		max_height = 4000,
 	})
