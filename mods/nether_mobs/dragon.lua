@@ -589,7 +589,7 @@ if not nethermobs.custom_spawn then
 		max_height = -5000,
 		min_height = -11000,
 		interval = 8,
-		chance = 500,
+		chance = 1000,
 		day_toggle = nil,
 		active_object_count = 1,
 		on_spawn = function(self, pos)
