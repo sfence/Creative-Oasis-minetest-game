@@ -279,7 +279,7 @@ core.register_node(":mobs:cobweb", {
 	liquid_renewable = false,
 	liquid_range = 0,
 	walkable = false,
-	groups = {snappy = 1, disable_jump = 1},
+	groups = {snappy = 1, cracky = 1, choppy = 1, crumbly = 1, oddly_breakable_by_hand = 1, disable_jump = 1,},
 	is_ground_content = false,
 	drop = "farming:string",
 	sounds = mobs.node_sound_leaves_defaults()
