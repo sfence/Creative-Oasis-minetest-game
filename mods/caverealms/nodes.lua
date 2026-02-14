@@ -2,14 +2,9 @@
 
 --NODES--
 
-local FALLING_ICICLES = caverealms.config.falling_icicles --true --toggle to turn on or off falling icicles in glaciated biome
-local FALLCHA = caverealms.config.fallcha --0.33 --chance of causing the structure to fall
-local DM_TOP = caverealms.config.dm_top -- -4000 --level at which Dungeon Master Realms start to appear
-
-
 --glowing crystal
 minetest.register_node("caverealms:glow_crystal", {
-	description = "Glow Crystal",
+	description = "Glow Sapphire",
 	tiles = {"caverealms_glow_crystal.png"},
 	is_ground_content = true,
 	groups = {cracky=3},
@@ -37,7 +32,7 @@ minetest.register_node("caverealms:glow_emerald", {
 
 --glowing mese crystal blocks
 minetest.register_node("caverealms:glow_mese", {
-	description = "Mese Crystal Block",
+	description = "Glow Mese Crystal",
 	tiles = {"caverealms_glow_mese.png"},
 	is_ground_content = true,
 	groups = {cracky=3},
@@ -140,7 +135,7 @@ minetest.register_node("caverealms:salt_crystal", {
 	description = "Salt Crystal",
 	tiles = {"caverealms_salt_crystal.png"},
 	is_ground_content = true,
-	groups = {cracky=3},
+	groups = {cracky=2},
 	sounds = default.node_sound_glass_defaults(),
 	light_source = 11,
 	paramtype = "light",
@@ -149,144 +144,69 @@ minetest.register_node("caverealms:salt_crystal", {
 	sunlight_propagates = true,
 })
 
---alternate version for stalactites
-minetest.register_node("caverealms:hanging_thin_ice", {
-	description = "Thin Ice",
-	tiles = {"caverealms_thin_ice.png"},
+--glowing crystal gem
+minetest.register_node("caverealms:glow_gem", {
+	description = "Glow Gem",
+	tiles = {"caverealms_glow_gem.png"},
+	inventory_image = "caverealms_glow_gem.png",
+	wield_image = "caverealms_glow_gem.png",
 	is_ground_content = true,
-	groups = {cracky=3},
+	groups = {cracky = 3, oddly_breakable_by_hand = 1, attached_node = 1},
 	sounds = default.node_sound_glass_defaults(),
-	use_texture_alpha = true,
-	drawtype = "glasslike",
-	sunlight_propagates = true,
-	drop = "caverealms:thin_ice",
-	freezemelt = "default:water_flowing",
+	light_source = 11,
 	paramtype = "light",
-	after_dig_node = function(pos, oldnode, oldmetadata, digger)
-		if FALLING_ICICLES then
-			if math.random() <= FALLCHA then
-				obj = minetest.add_entity(pos, "caverealms:falling_ice")
-				obj:get_luaentity():set_node(oldnode)
-				for y = -13, 13 do
-					for x = -3, 3 do
-					for z = -3, 3 do
-						local npos = {x=pos.x+x, y=pos.y+y, z=pos.z+z}
-						if minetest.get_node(npos).name == "caverealms:hanging_thin_ice" then
-							nobj = minetest.add_entity(npos, "caverealms:falling_ice")
-							nobj:get_luaentity():set_node(oldnode)
-							minetest.remove_node(npos)
-						end
-					end
-					end
-				end
-				minetest.remove_node(pos)
-			else
-				return 1
-			end
-		else
-			return 1
-		end
-	end,
+	drawtype = "plantlike",
+	walkable = false,
+	buildable_to = true,
+	visual_scale = 0.75,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
+	}
 })
 
---glowing crystal gem
-local glow_gem_size = { 1.0, 1.2, 1.4, 1.6, 1.7 }
-
-for i in ipairs(glow_gem_size) do
-	if i == 1 then
-		nodename = "caverealms:glow_gem"
-	else
-		nodename = "caverealms:glow_gem_"..i
-	end
-
-	vs = glow_gem_size[i]
-
-	minetest.register_node(nodename, {
-		description = "Glow Gem",
-		tiles = {"caverealms_glow_gem.png"},
-		inventory_image = "caverealms_glow_gem.png",
-		wield_image = "caverealms_glow_gem.png",
-		is_ground_content = true,
-		groups = {cracky=3, oddly_breakable_by_hand=1},
-		sounds = default.node_sound_glass_defaults(),
-		light_source = 11,
-		paramtype = "light",
-		drawtype = "plantlike",
-		walkable = false,
-		buildable_to = true,
-		visual_scale = vs,
-		selection_box = {
-			type = "fixed",
-			fixed = {-0.5*vs, -0.5*vs, -0.5*vs, 0.5*vs, -5/16*vs, 0.5*vs},
-		}
-	})
-end
-
 --glowing salt gem
-local salt_gem_size = { 1.0, 1.2, 1.4, 1.6, 1.7 }
-
-for i in ipairs(salt_gem_size) do
-	if i == 1 then
-		nodename = "caverealms:salt_gem"
-	else
-		nodename = "caverealms:salt_gem_"..i
-	end
-
-	vs = salt_gem_size[i]
-
-	minetest.register_node(nodename, {
-		description = "Salt Gem",
-		tiles = {"caverealms_salt_gem.png"},
-		inventory_image = "caverealms_salt_gem.png",
-		wield_image = "caverealms_salt_gem.png",
-		is_ground_content = true,
-		groups = {cracky=3, oddly_breakable_by_hand=1},
-		sounds = default.node_sound_glass_defaults(),
-		light_source = 11,
-		paramtype = "light",
-		drawtype = "plantlike",
-		walkable = false,
-		buildable_to = true,
-		visual_scale = vs,
-		selection_box = {
-			type = "fixed",
-			fixed = {-0.5*vs, -0.5*vs, -0.5*vs, 0.5*vs, -5/16*vs, 0.5*vs},
-		}
-	})
-end
+minetest.register_node("caverealms:salt_gem", {
+	description = "Salt Gem",
+	tiles = {"caverealms_salt_gem.png"},
+	inventory_image = "caverealms_salt_gem.png",
+	wield_image = "caverealms_salt_gem.png",
+	is_ground_content = true,
+	groups = {cracky = 3, oddly_breakable_by_hand = 1, attached_node = 1},
+	sounds = default.node_sound_glass_defaults(),
+	light_source = 11,
+	paramtype = "light",
+	drawtype = "plantlike",
+	walkable = false,
+	buildable_to = true,
+	visual_scale = 0.75,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
+	}
+})
 
 --stone spike
-local spike_size = { 1.0, 1.2, 1.4, 1.6, 1.7 }
+minetest.register_node("caverealms:spike", {
+	description = "Stone Spike",
+	tiles = {"caverealms_spike.png"},
+	inventory_image = "caverealms_spike.png",
+	wield_image = "caverealms_spike.png",
+	is_ground_content = true,
+	groups = {cracky = 3, oddly_breakable_by_hand = 1, attached_node = 1},
+	sounds = default.node_sound_stone_defaults(),
+	light_source = 3,
+	paramtype = "light",
+	drawtype = "plantlike",
+	walkable = false,
+	buildable_to = true,
+	visual_scale = 0.75,
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
+	}
+})
 
-for i in ipairs(spike_size) do
-	if i == 1 then
-		nodename = "caverealms:spike"
-	else
-		nodename = "caverealms:spike_"..i
-	end
-
-	vs = spike_size[i]
-
-	minetest.register_node(nodename, {
-		description = "Stone Spike",
-		tiles = {"caverealms_spike.png"},
-		inventory_image = "caverealms_spike.png",
-		wield_image = "caverealms_spike.png",
-		is_ground_content = true,
-		groups = {cracky=3, oddly_breakable_by_hand=1},
-		sounds = default.node_sound_stone_defaults(),
-		light_source = 3,
-		paramtype = "light",
-		drawtype = "plantlike",
-		walkable = false,
-		buildable_to = true,
-		visual_scale = vs,
-		selection_box = {
-			type = "fixed",
-			fixed = {-0.5*vs, -0.5*vs, -0.5*vs, 0.5*vs, -5/16*vs, 0.5*vs},
-		}
-	})
-end
 
 --upward pointing icicle
 minetest.register_node("caverealms:icicle_up", {
@@ -335,7 +255,7 @@ minetest.register_node("caverealms:stone_with_moss", {
 	description = "Cave Stone with Moss",
 	tiles = {"default_cobble.png^caverealms_moss.png", "default_cobble.png", "default_cobble.png^caverealms_moss_side.png"},
 	is_ground_content = true,
-	groups = {crumbly=3},
+	groups = {crumbly=1, cracky=3},
 	drop = 'default:cobble',
 	sounds = default.node_sound_dirt_defaults({
 		footstep = {name="default_grass_footstep", gain=0.25},
@@ -347,7 +267,7 @@ minetest.register_node("caverealms:stone_with_lichen", {
 	description = "Cave Stone with Lichen",
 	tiles = {"default_cobble.png^caverealms_lichen.png", "default_cobble.png", "default_cobble.png^caverealms_lichen_side.png"},
 	is_ground_content = true,
-	groups = {crumbly=3},
+	groups = {crumbly=1, cracky=3},
 	drop = 'default:cobble',
 	sounds = default.node_sound_dirt_defaults({
 		footstep = {name="default_grass_footstep", gain=0.25},
@@ -359,7 +279,7 @@ minetest.register_node("caverealms:stone_with_algae", {
 	description = "Cave Stone with Algae",
 	tiles = {"default_cobble.png^caverealms_algae.png", "default_cobble.png", "default_cobble.png^caverealms_algae_side.png"},
 	is_ground_content = true,
-	groups = {crumbly=3},
+	groups = {crumbly=1, cracky=3},
 	drop = 'default:cobble',
 	sounds = default.node_sound_dirt_defaults({
 		footstep = {name="default_grass_footstep", gain=0.25},
@@ -368,15 +288,15 @@ minetest.register_node("caverealms:stone_with_algae", {
 
 --tiny-salt-crystal-covered cobble - pink-ish
 minetest.register_node("caverealms:stone_with_salt", {
-	description = "Cave Stone with Salt",
-	tiles = {"caverealms_salty2.png"},--{"caverealms_salty2.png^caverealms_salty.png", "caverealms_salty2.png", "caverealms_salty2.png^caverealms_salty_side.png"},
+	description = "Salt Crystal",
+	tiles = {"caverealms_salty2.png"},
 	light_source = 9,
 	paramtype = "light",
 	use_texture_alpha = true,
 	drawtype = "glasslike",
 	sunlight_propagates = true,
 	is_ground_content = true,
-	groups = {crumbly=3},
+	groups = {cracky=3},
 	sounds = default.node_sound_glass_defaults(),
 })
 
@@ -385,9 +305,10 @@ minetest.register_node("caverealms:hot_cobble", {
 	description = "Hot Cobble",
 	tiles = {"caverealms_hot_cobble.png"},
 	is_ground_content = true,
-	groups = {crumbly=2, hot=1},
+	groups = {cracky=1, hot=1, unbreakable = 1},
 	damage_per_second = 1,
 	light_source = 3,
+	paramtype = "light",
 	sounds = default.node_sound_stone_defaults({
 		footstep = {name="default_stone_footstep", gain=0.25},
 	}),
@@ -398,8 +319,9 @@ minetest.register_node("caverealms:glow_obsidian", {
 	description = "Glowing Obsidian",
 	tiles = {"caverealms_glow_obsidian.png"},
 	is_ground_content = true,
-	groups = {crumbly=1},
+	groups = {cracky=1, level=2},
 	light_source = 7,
+	paramtype = "light",
 	sounds = default.node_sound_stone_defaults({
 		footstep = {name="default_stone_footstep", gain=0.25},
 	}),
@@ -407,15 +329,63 @@ minetest.register_node("caverealms:glow_obsidian", {
 
 --Glow Obsidian 2 - has traces of lava
 minetest.register_node("caverealms:glow_obsidian_2", {
-	description = "Hot Glow Obsidian",
+	description = "Hot Glowing Obsidian",
 	tiles = {"caverealms_glow_obsidian2.png"},
 	is_ground_content = true,
-	groups = {crumbly=1, hot=1},
-	damage_per_second = 1,
+	groups = {cracky=1, hot=1, level=2},
 	light_source = 9,
+	paramtype = "light",
 	sounds = default.node_sound_stone_defaults({
 		footstep = {name="default_stone_footstep", gain=0.25},
 	}),
+})
+
+--Glow Obsidian Bricks
+minetest.register_node("caverealms:glow_obsidian_brick", {
+	description = "Glow Obsidian Brick",
+	tiles = {"caverealms_glow_obsidian_brick.png"},
+	light_source = 7,
+	groups = {cracky = 1, level = 2},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+minetest.register_node("caverealms:glow_obsidian_brick_2", {
+	description = "Glow Obsidian Brick",
+	tiles = {"caverealms_glow_obsidian_brick_2.png"},
+	light_source = 9,
+	groups = {cracky = 1, level = 2},
+	sounds = default.node_sound_stone_defaults(),
+})
+
+--Glow Obsidian Stairs/Slabs
+stairs.register_stair_and_slab(
+	"glow_obsidian_brick",
+	"caverealms:glow_obsidian_brick",
+	{cracky = 1, level = 2},
+	{"caverealms_glow_obsidian_brick.png"},
+	"Glow Obsidian Brick Stair",
+	"Glow Obsidian Brick Slab",
+	default.node_sound_stone_defaults())
+
+stairs.register_stair_and_slab(
+	"glow_obsidian_brick_2",
+	"caverealms:glow_obsidian_brick_2",
+	{cracky = 1, level = 2},
+	{"caverealms_glow_obsidian_brick_2.png"},
+	"Glow Obsidian Brick Stair",
+	"Glow Obsidian Brick Slab",
+	default.node_sound_stone_defaults())
+
+--Glow Obsidian Glass
+minetest.register_node("caverealms:glow_obsidian_glass", {
+	description = "Glow Obsidian Glass",
+	drawtype = "glasslike_framed_optional",
+	tiles = {"caverealms_glow_obsidian_glass.png", "default_obsidian_glass_detail.png"},
+	paramtype = "light",
+	light_source = 13,
+	sunlight_propagates = true,
+	groups = {cracky = 3},
+	sounds = default.node_sound_glass_defaults(),
 })
 
 --Coal Dust
@@ -429,7 +399,7 @@ minetest.register_node("caverealms:coal_dust", {
 
 --glow worms
 minetest.register_node("caverealms:glow_worm", {
-	description = "Glow Worms",
+	description = "Blue Glow Worms",
 	tiles = {"caverealms_glow_worm.png"},
 	inventory_image = "caverealms_glow_worm.png",
 	wield_image = "caverealms_glow_worm.png",
@@ -443,21 +413,18 @@ minetest.register_node("caverealms:glow_worm", {
 	visual_scale = 1.0,
 	selection_box = {
 		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5, 0.5, -0.5, 0.5},
+		fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
 	},
 })
 
---cave plants go here
-
---glowing fungi
-minetest.register_node("caverealms:fungus", {
-	description = "Glowing Fungus",
-	tiles = {"caverealms_fungi.png"},
-	inventory_image = "caverealms_fungi.png",
-	wield_image = "caverealms_fungi.png",
+minetest.register_node("caverealms:glow_worm_green", {
+	description = "Green Glow Worms",
+	tiles = {"caverealms_glow_worm_green.png"},
+	inventory_image = "caverealms_glow_worm_green.png",
+	wield_image = "caverealms_glow_worm_green.png",
 	is_ground_content = true,
 	groups = {oddly_breakable_by_hand=3},
-	light_source = 5,
+	light_source = 9,
 	paramtype = "light",
 	drawtype = "plantlike",
 	walkable = false,
@@ -465,19 +432,19 @@ minetest.register_node("caverealms:fungus", {
 	visual_scale = 1.0,
 	selection_box = {
 		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
+		fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
 	},
 })
 
---mycena mushroom
-minetest.register_node("caverealms:mycena", {
-	description = "Mycena Mushroom",
-	tiles = {"caverealms_mycena.png"},
-	inventory_image = "caverealms_mycena.png",
-	wield_image = "caverealms_mycena.png",
+minetest.register_node("caverealms:fire_vine", {
+	description = "Fire Vine",
+	tiles = {"caverealms_fire_vine.png"},
+	inventory_image = "caverealms_fire_vine.png",
+	wield_image = "caverealms_fire_vine.png",
 	is_ground_content = true,
+	damage_per_second = 1,
 	groups = {oddly_breakable_by_hand=3},
-	light_source = 6,
+	light_source = 9,
 	paramtype = "light",
 	drawtype = "plantlike",
 	walkable = false,
@@ -485,79 +452,32 @@ minetest.register_node("caverealms:mycena", {
 	visual_scale = 1.0,
 	selection_box = {
 		type = "fixed",
-		fixed = {-0.5, -0.5, -0.5, 0.5, -5/16, 0.5},
+		fixed = {-1/6, -1/2, -1/6, 1/6, 1/2, 1/6},
 	},
 })
 
---giant mushroom
---stem
-minetest.register_node("caverealms:mushroom_stem", {
-	description = "Giant Mushroom Stem",
-	tiles = {"caverealms_mushroom_stem.png"},
-	is_ground_content = true,
-	groups = {oddly_breakable_by_hand=1},
-})
-
---cap
-minetest.register_node("caverealms:mushroom_cap", {
-	description = "Giant Mushroom Cap",
-	tiles = {"caverealms_mushroom_cap.png"},
-	is_ground_content = true,
-	groups = {oddly_breakable_by_hand=1},
-})
-
---gills
-minetest.register_node("caverealms:mushroom_gills", {
-	description = "Giant Mushroom Gills",
-	tiles = {"caverealms_mushroom_gills.png"},
-	is_ground_content = true,
-	groups = {oddly_breakable_by_hand=1},
-	drawtype = "plantlike",
-	paramtype = "light",
-})
 
 --define special flame so that it does not expire
-minetest.register_alias("caverealms:constant_flame", "fire:permanent_flame")
-
---node to create a treasure chest in DM Forts.
-minetest.register_node("caverealms:s_chest", {
-	description = "Trying to rob the bank before it's opened, eh?",
-	tiles = {"default_chest_front.png"},
-	paramtype2 = "facedir",
-	groups = {choppy=3,oddly_breakable_by_hand=2,cavechest=1, not_in_creative_inventory=1},
-	after_dig_node = function(pos, oldnode, oldmetadata, digger)
-		if pos.y > DM_TOP then
-			minetest.remove_node(pos)
-		end
-	end,
-})
-
---hacky schematic placers
-
-minetest.register_node("caverealms:s_fountain", {
-	description = "A Hack like you should know what this does...",
-	tiles = {"caverealms_stone_eyes.png"},
-	groups = {crumbly=3, schema=1, not_in_creative_inventory=1},
-	after_dig_node = function(pos, oldnode, oldmetadata, digger)
-		if pos.y > DM_TOP then
-			minetest.remove_node(pos)
-		end
-	end,
-})
-
-minetest.register_node("caverealms:s_fortress", {
-	description = "A Hack like you should know what this does...",
-	tiles = {"caverealms_stone_eyes.png"},
-	groups = {crumbly=3, schema=1, not_in_creative_inventory=1},
-	after_dig_node = function(pos, oldnode, oldmetadata, digger)
-		if pos.y > DM_TOP then
-			minetest.remove_node(pos)
-		end
-	end,
+minetest.register_node("caverealms:constant_flame", {
+	description = "Fire",
+	drawtype = "plantlike",
+	tiles = {{
+		name="fire_basic_flame_animated.png",
+		animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=1},
+	}},
+	inventory_image = "fire_basic_flame.png",
+	light_source = 14,
+	groups = {igniter=2, dig_immediate=3, hot=3, not_in_creative_inventory=1},
+	paramtype = "light",
+	drop = '',
+	walkable = false,
+	buildable_to = true,
+	damage_per_second = 4,
 })
 
 --dungeon master statue (nodebox)
 minetest.register_node("caverealms:dm_statue", {
+	description = "Dungeon Master Statue",
 	tiles = {
 		"caverealms_dm_stone.png",
 		"caverealms_dm_stone.png",
@@ -585,3 +505,22 @@ minetest.register_node("caverealms:dm_statue", {
 		type = "regular"
 	}
 })
+
+
+-- Compatibility
+minetest.register_alias("caverealms:hanging_thin_ice", "caverealms:thin_ice")
+
+minetest.register_alias("caverealms:spike_2", "caverealms:spike")
+minetest.register_alias("caverealms:spike_3", "caverealms:spike")
+minetest.register_alias("caverealms:spike_4", "caverealms:spike")
+minetest.register_alias("caverealms:spike_5", "caverealms:spike")
+
+minetest.register_alias("caverealms:salt_gem_2", "caverealms:salt_gem")
+minetest.register_alias("caverealms:salt_gem_3", "caverealms:salt_gem")
+minetest.register_alias("caverealms:salt_gem_4", "caverealms:salt_gem")
+minetest.register_alias("caverealms:salt_gem_5", "caverealms:salt_gem")
+
+minetest.register_alias("caverealms:glow_gem_2", "caverealms:glow_gem")
+minetest.register_alias("caverealms:glow_gem_3", "caverealms:glow_gem")
+minetest.register_alias("caverealms:glow_gem_4", "caverealms:glow_gem")
+minetest.register_alias("caverealms:glow_gem_5", "caverealms:glow_gem")

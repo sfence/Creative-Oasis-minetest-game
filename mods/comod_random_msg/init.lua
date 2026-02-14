@@ -31,6 +31,7 @@ local messages = {
 	S("If you are using Luanti 5.7 or older, you may see bug warnings due to outdated versions."),
 	S("Leaves reduce fall damage and can be used for safe landings."),
 	S("Type /spawn to quickly return to spawn."),
+    S("Type /safe_yourself_one_hp to bring yourself back from death."),
 	S("Type /city to quickly return to the server city."),
     S("Join our Discord: https://discord.gg/kMYd9UW4kW"),
 	S("Check out our website: https://hosting.nico-network.net/oasis"),
@@ -38,6 +39,7 @@ local messages = {
 	S("Type /help to see all available commands and their usage."),
     S("Join our Discord: https://discord.gg/kMYd9UW4kW"),
 	S("Some special tools will glow in dark areas when you hold them."),
+    S("Type /safe_yourself_one_hp to bring yourself back from death."),
 	S("Flight potions are only available during specific events."),
 	S("Items conflicting with each other? Try using an Item Exchanger."),
 	S("Found a bug? Report it by using /mail Anastasiya."),
@@ -45,6 +47,7 @@ local messages = {
 	S("Want daytime? Use a Vote Day coin."),
 	S("Can't see stamina/HP bar? Rejoin the game."),
     S("Join our Discord: https://discord.gg/kMYd9UW4kW"),
+    S("Type /safe_yourself_one_hp to bring yourself back from death."),
 
 	-- Basic Machines
 	S("[Basic_Machines] Movers can push, pull, and swap nodes automatically."),

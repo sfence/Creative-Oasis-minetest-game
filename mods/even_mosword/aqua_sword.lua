@@ -98,11 +98,11 @@ minetest.register_tool("even_mosword:aqua_sword", {
 })
 
 -- Crafting recipe
-minetest.register_craft({
-    output = "even_mosword:aqua_sword",
-    recipe = {
-        {'', 'bucket:bucket_water', ''},
-        {'', 'bucket:bucket_water', ''},
-        {'', 'default:steel_ingot', ''},
-    }
-})
+--minetest.register_craft({
+    --output = "even_mosword:aqua_sword",
+    --recipe = {
+        --{'', 'bucket:bucket_water', ''},
+        --{'', 'bucket:bucket_water', ''},
+        --{'', 'default:steel_ingot', ''},
+    --}
+--})

@@ -5,7 +5,7 @@
 minetest.register_tool("comod_paxel:paxel_diamond", {
 	description = "Diamond Paxel",
 	inventory_image = "paxel_diamond.png",
-
+	light_source = 10,
 	tool_capabilities = {
 		full_punch_interval = 0.8,  -- faster than diamond (0.9)
 		max_drop_level = 3,

@@ -34,13 +34,13 @@ local news_text = [[
 
 💁 **Server staffs**
 - Admin: Anastasiya
-- Developer: Tomlaus
+- Developer: Tomlaus, Opons, SFENCE
 - Co-Admin: Alexander_jones
 - Manager: asudip
 - Moderator: Zandar
-- Guardian: Mother, I_am
-- Builder: BMO, yayyer, Zandar, filx
-- Contributor: Opons, LadyK
+- Guardian: Mother, I_am, Fedevit
+- Builder: BMO, yayyer, Zandar, filx, kattttt, michi16bit
+- Contributor: LadyK
 
 👍 **Server updates 12.23**
 - Added mods: Technic, Basic_machine, Terumet, Elepower, Logistica, Techpack, etc.

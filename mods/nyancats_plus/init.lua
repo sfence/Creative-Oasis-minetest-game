@@ -109,5 +109,4 @@ minetest.register_craft({
 		{'', "nyancats_plus:rainbow_shard", ''},
 		{'', 'group:stick', ''},
 	}
-
 })

@@ -97,11 +97,11 @@ minetest.register_tool("even_mosword:earth_sword", {
 })
 
 -- Crafting recipe
-minetest.register_craft({
-    output = "even_mosword:earth_sword",
-    recipe = {
-        {'', 'default:dirt', ''},
-        {'', 'default:dirt', ''},
-        {'', 'default:steel_ingot', ''},
-    }
-})
+--minetest.register_craft({
+    --output = "even_mosword:earth_sword",
+    --recipe = {
+        --{'', 'default:dirt', ''},
+        --{'', 'default:dirt', ''},
+        --{'', 'default:steel_ingot', ''},
+    --}
+--})
