@@ -97,11 +97,11 @@ minetest.register_tool("even_mosword:flame_sword", {
 })
 
 -- Crafting recipe
-minetest.register_craft({
-    output = "even_mosword:flame_sword",
-    recipe = {
-        {'', 'bucket:bucket_lava', ''},
-        {'', 'bucket:bucket_lava', ''},
-        {'', 'default:obsidian_shard', ''},
-    }
-})
+--minetest.register_craft({
+    --output = "even_mosword:flame_sword",
+    --recipe = {
+        --{'', 'bucket:bucket_lava', ''},
+        --{'', 'bucket:bucket_lava', ''},
+        --{'', 'default:obsidian_shard', ''},
+    --}
+--})

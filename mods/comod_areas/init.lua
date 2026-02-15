@@ -4,7 +4,7 @@ local violations = {}
 local last_positions = {}
 
 local LIMIT = 10
-local WINDOW = 20 -- seconds (changed from 26)
+local WINDOW = 20 
 
 -------------------------------------------------
 -- Track last safe position continuously

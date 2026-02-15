@@ -108,7 +108,7 @@ if not mobs.custom_spawn_monster then
 		nodes = {"default:lava_source"},
 		chance = 150,
 		active_object_count = 3,
-		max_height = 0
+		max_height = 100
 	})
 end
 

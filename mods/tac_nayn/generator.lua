@@ -56,8 +56,3 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	-- Generate tac nayns
 	generate_tacnayns(seed, minp, maxp)
 end)
-
-
-
-
-

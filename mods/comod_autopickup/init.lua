@@ -2,8 +2,8 @@
 -- MCL-style Auto Pickup for Minetest Game
 -- =========================================
 
-local pickup_radius = 2.1
-local pickup_delay = 0.9
+local pickup_radius = 2.0
+local pickup_delay = 1.1
 
 local pull_strength = 8
 local max_speed = 4

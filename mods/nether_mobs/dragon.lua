@@ -223,14 +223,28 @@ minetest.register_node(":nether_mobs:permanent_dragon_fire", { --only avaible in
 -- Fire Breathing
 
 function fire_breath(pos)
-	for i=pos.x-math.random(0, 1), pos.x+math.random(0, 1), 1 do
-		for j=pos.y-1, pos.y+2, 1 do
-			for k=pos.z-math.random(0, 1), pos.z+math.random(0, 1), 1 do
+	for i = pos.x - math.random(0,1), pos.x + math.random(0,1) do
+		for j = pos.y - 1, pos.y + 2 do
+			for k = pos.z - math.random(0,1), pos.z + math.random(0,1) do
+
 				local p = {x=i, y=j, z=k}
-				local n = minetest.env:get_node(p).name
-				if minetest.get_item_group(n, "unbreakable") == 1 or minetest.is_protected(p, "") then
-				else
-					minetest.set_node({x=i, y=j, z=k}, {name="nether_mobs:dragon_fire"})
+				local node = minetest.get_node(p).name
+
+				local protected = false
+
+				-- check blacklist
+				for _, blacknode in ipairs(blacklist) do
+					if node == blacknode then
+						protected = true
+						break
+					end
+				end
+
+				-- only place fire if allowed
+				if not protected
+				and minetest.get_item_group(node,"unbreakable") ~= 1
+				and not minetest.is_protected(p,"") then
+					minetest.set_node(p,{name="nether_mobs:dragon_fire"})
 				end
 			end
 		end
@@ -589,7 +603,7 @@ if not nethermobs.custom_spawn then
 		max_light = 14, --not in bright daylight
 		max_height = -5000,
 		min_height = -11000,
-		interval = 100,
+		interval = 200,
 		chance = 1000,
 		day_toggle = nil,
 		active_object_count = 1,

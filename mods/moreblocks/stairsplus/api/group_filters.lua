@@ -37,6 +37,15 @@ function api.register_ignore_groups(groups)
 	end
 end
 
+local shapes_always_in_inventory = {
+	micro_8 = true,
+	slab_8 = true,
+	panel_8 = true,
+	stair = true,
+	stair_inner = true,
+	stair_outer = true,
+}
+
 function api.build_groups(node, shape)
 	local node_def = minetest.registered_nodes[node]
 
@@ -45,6 +54,10 @@ function api.build_groups(node, shape)
 		not_in_creative_inventory = (not in_creative_inventory) and 1 or nil,
 		not_in_craft_guide = (not in_craft_guide) and 1 or nil,
 	}
+
+	if shapes_always_in_inventory[shape] then
+		groups.not_in_creative_inventory = nil
+	end
 
 	local shape_def = api.registered_shapes[shape]
 

@@ -47,7 +47,7 @@ local bones_formspec =
 	default.get_hotbar_bg(0,4.85)
 
 local share_bones_time = 2.592e+6       -- 30 days
-local share_bones_time_early = 864000    
+local share_bones_time_early = 604800  
 
 local bones_def = {
 	description = S("Bones"),
